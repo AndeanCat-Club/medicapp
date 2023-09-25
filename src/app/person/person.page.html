@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="data-container">
+    <ion-item style="padding-top: 10px" lines="none">
+      <h1 class="title-role">Personas</h1>
+    </ion-item>
+    <ion-item style="margin-bottom: 10px;" lines="none">
+      <p class="subtitle-role">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem non quo animi</p>
+    </ion-item>
+
+    <ion-item> 
+      <ion-toolbar class="ion-toolbar">
+        <ion-searchbar class="custom" placeholder="Buscar" (ionInput)="searchPerson($event)"></ion-searchbar>
+        <ion-buttons class="cellphone" slot="end" > <!-- (click)="openRole(null)" -->
+          <ion-button>
+            <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+      <button class="button-create desktop"> <!-- (click)="openRole(null)"  -->
+        Agregar persona
+      </button>
+    </ion-item>
+
+    <div style="border-bottom: 1px solid #EFF3FB; cursor: pointer;" *ngFor="let person of persons">
+      <ion-item class="item-options" lines="none"> <!--(click)="openRoleOption(role)"  -->
+        <ion-avatar>
+          <img src="https://avatars.githubusercontent.com/u/52795648?v=4">
+        </ion-avatar>
+        <ion-label style="margin-left: 20px;" *ngIf="person.firstName && person.lastName"><b>{{person.firstName}} {{person.lastName}}</b></ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+      <div style=" padding-bottom: 10px;"> <!--(click)="openRoleOption(role)"  -->
+        <ion-chip style="margin-left: 15px;" *ngIf="person.rut">
+          <ion-icon name="id-card-outline"></ion-icon>
+          <ion-label><b>ID</b>: {{person.rut}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
+          <ion-icon name="egg-outline"></ion-icon>
+          <p><b>Cumpleaños</b>: {{calculateDate(person.birthDate)}}</p>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
+          <ion-icon name="egg-outline"></ion-icon>
+          <p><b>Edad</b>: {{calculateAge(person.birthDate)}}</p>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="person.emergencyContact">
+          <ion-icon name="call-outline"></ion-icon>
+          <p><b>Número de emergencia</b>: {{person.emergencyContact}}</p>
+        </ion-chip>
+      </div>
+    </div>
+    
+    <ion-item  *ngIf="persons.length === 0">
+      <p>No tienes agregadas personas aún...</p>
+    </ion-item>
+  </div>
+</ion-content>
+
+<!-- <ion-content>
+  <div class="loading"></div>
+</ion-content> -->

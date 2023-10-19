@@ -1,35 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
     <ion-title>{{pageTitle}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="data-container">
+<ion-content >
+  <div class="data-container" *ngIf="!loading">
     <ion-item style="padding-top: 10px" lines="none">
       <h1 class="title-role">Personas</h1>
     </ion-item>
-    <ion-item style="margin-bottom: 10px;" lines="none">
+    <!--<ion-item style="margin-bottom: 10px;" lines="none">
       <p class="subtitle-role">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem non quo animi</p>
-    </ion-item>
+    </ion-item>-->
 
     <ion-item> 
       <ion-toolbar class="ion-toolbar">
         <ion-searchbar class="custom" placeholder="Buscar" (ionInput)="searchPerson($event)"></ion-searchbar>
-        <ion-buttons class="cellphone" slot="end" > <!-- (click)="openRole(null)" -->
+        <ion-buttons class="cellphone" slot="end" (click)="createPerson()">
           <ion-button>
             <ion-icon slot="icon-only" name="add-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
 
-      <button class="button-create desktop"> <!-- (click)="openRole(null)"  -->
+      <button class="button-create desktop" (click)="createPerson()">
         Agregar persona
       </button>
     </ion-item>
 
-    <div style="border-bottom: 1px solid #EFF3FB; cursor: pointer;" *ngFor="let person of persons">
-      <ion-item class="item-options" lines="none"> <!--(click)="openRoleOption(role)"  -->
+    <div style="margin-top:20px; border-bottom: 1px solid #EFF3FB; cursor: pointer;" *ngFor="let person of persons">
+      <ion-item class="item-options" lines="none" (click)="options(person)">
         <ion-avatar>
           <img src="https://avatars.githubusercontent.com/u/52795648?v=4">
         </ion-avatar>
@@ -40,7 +44,7 @@
           </ion-button>
         </ion-buttons>
       </ion-item>
-      <div style=" padding-bottom: 10px;"> <!--(click)="openRoleOption(role)"  -->
+      <div style=" padding-bottom: 10px;" (click)="options(person)">
         <ion-chip style="margin-left: 15px;" *ngIf="person.rut">
           <ion-icon name="id-card-outline"></ion-icon>
           <ion-label><b>ID</b>: {{person.rut}}</ion-label>
@@ -64,8 +68,8 @@
       <p>No tienes agregadas personas aún...</p>
     </ion-item>
   </div>
-</ion-content>
 
-<!-- <ion-content>
-  <div class="loading"></div>
-</ion-content> -->
+  <div class="data-container" *ngIf="loading">
+    <div class="loading"></div>
+  </div>
+</ion-content>

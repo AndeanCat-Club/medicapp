@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Person } from '../_types/person.types';
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +11,15 @@ export class PersonService {
 
     constructor(private http: HttpClient) {
     }
+
+    insert(person: any){    
+        person.userId = '6501847489104e7bf51c4e01'
+        person.status = true;
+        return this.http.post<any[]>(`${this.url}/person/`, person, {
+          headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+        });
+      }
 
     listByUserId() {
         const userId = '6501847489104e7bf51c4e01' // to do change this to a login

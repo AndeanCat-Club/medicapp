@@ -32,6 +32,17 @@
       </button>
     </ion-item>
 
+    <ion-item>
+      <ion-segment value="default">
+        <ion-segment-button value="default" (click)="listActivePersons()">
+          <ion-label>Activados</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="segment" (click)="listDesactivatedPersons()">
+          <ion-label>Desactivados</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
     <div style="margin-top:20px; border-bottom: 1px solid #EFF3FB; cursor: pointer;" *ngFor="let person of persons">
       <ion-item class="item-options" lines="none" (click)="options(person)">
         <ion-avatar>

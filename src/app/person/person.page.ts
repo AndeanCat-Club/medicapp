@@ -13,7 +13,9 @@ import { Person } from '../_types/person.types';
 export class PersonPage implements OnInit {
   pageTitle: string = 'Personas'
   persons: Person[] = []
-  originalPersons: Person[] = [];
+  activePersons: Person[] = []
+  desactivatedPersons: Person[] = []
+  originalPersons: Person[] = []
 
   loading = false
 
@@ -21,15 +23,28 @@ export class PersonPage implements OnInit {
 
   async ngOnInit() {
     this.loading = true;
-    this.personService.listByUserId().subscribe((persons: any) => {
-      this.loading = false
+    this.personService.listByUserId().subscribe((persons: Person[]) => {
+      
       if (persons.length) {
-        this.persons = persons
-        this.originalPersons = persons;
+         
+        this.activePersons = persons.filter( person => person.status)
+        this.desactivatedPersons = persons.filter( person => !person.status)
+        this.listActivePersons()
       }
+      this.loading = false
     }, () => {
       this.loading = false
     })
+  }
+
+  listActivePersons() {
+    this.persons = this.activePersons;
+    this.originalPersons = this.activePersons;
+  }
+
+  listDesactivatedPersons() {
+    this.persons = this.desactivatedPersons;
+    this.originalPersons = this.desactivatedPersons;
   }
 
   calculateAge(birthDate: Date) {
@@ -42,6 +57,7 @@ export class PersonPage implements OnInit {
 
   searchPerson(event: any) {
     const searchTerm = event.target.value.toLowerCase();
+    
     this.persons = this.originalPersons.filter((person: Person) => {
       for (const key of Object.keys(person) as (keyof Person)[]) {
         const value = person[key];

@@ -14,7 +14,9 @@ import { UtilService } from './_services/utils.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot({
+    mode: 'md'
+  }), HttpClientModule, AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService],
   bootstrap: [AppComponent],
 })

@@ -10,10 +10,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" slot="md">
   <form [formGroup]="personForm">
     <div class="individual-input-container">
-      <ion-input label="Nombre" label-placement="floating" fill="outline" formControlName="firstName" name="firstName" required></ion-input>          
+      <ion-input slot="md" label="Nombre" label-placement="floating" fill="outline" formControlName="firstName" name="firstName" required></ion-input>          
     </div>
 
     <div class="individual-input-container">

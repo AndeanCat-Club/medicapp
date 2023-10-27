@@ -1,0 +1,337 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="medicationPage">
+      <ion-button (click)="closeMedicationPage()" color="light">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>{{pageTitle}}</ion-title>
+    
+    <ion-buttons slot="end" *ngIf="!medicationPage">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="!loading && !medicationPage">
+    <div class="person-profile">
+      <div class="person-name-container">
+        <p class="person-name"><b>{{person.firstName}} {{person.middleName}} {{person.lastName}} {{person.secondLastName}}</b></p>
+      </div>
+
+      <div class="person-circle-container">
+        <img class="person-circle" src="https://avatars.githubusercontent.com/u/52795648?v=4">
+      </div>
+    </div>
+
+    <div style="padding-bottom: 10px; padding-top: 10px;">
+      <ion-chip style="margin-left: 15px;" *ngIf="person.rut">
+        <ion-icon name="id-card-outline"></ion-icon>
+        <ion-label><b>ID</b>: {{person.rut}}</ion-label>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
+        <ion-icon name="egg-outline"></ion-icon>
+        <p><b>Cumpleaños</b>: {{calculateDate(person.birthDate)}}</p>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
+        <ion-icon name="egg-outline"></ion-icon>
+        <p><b>Edad</b>: {{calculateAge(person.birthDate)}}</p>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person.emergencyContact">
+        <ion-icon name="call-outline"></ion-icon>
+        <p><b>Número de emergencia</b>: {{person.emergencyContact}}</p>
+      </ion-chip>
+    </div>
+
+    <ion-item *ngIf="!bloodTypeEditing">
+      <ion-buttons>
+        <ion-button>
+            <ion-icon name="water-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
+      <p><b>Tipo de sangre:</b> {{person.medicalRecord.bloodType}}</p>
+      
+      <ion-buttons slot="end" *ngIf="!this.isEditing">
+        <ion-button slot="icon-only" (click)="changeBloodTypeEditing()">
+            <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <div *ngIf="bloodTypeEditing">
+      <ion-item lines="none">
+        <ion-buttons>
+          <ion-button>
+              <ion-icon name="water-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        
+        <p><b>Tipo de sangre:</b></p>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelUpdate()">
+            <ion-icon color="danger" name="close-circle"></ion-icon>
+          </ion-button>
+          <ion-button (click)="savePerson()">
+              <ion-icon color="success" name="checkmark-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <div class="individual-input-container">
+        <ion-input label="Tipo de sangre (* Opcional)" label-placement="floating" fill="outline" [(ngModel)]="person.medicalRecord.bloodType"></ion-input>          
+      </div>
+    </div>
+
+    <ion-item lines="none" *ngIf="!allergiesEditing">    
+      <ion-buttons>
+        <ion-button >
+            <ion-icon name="thermometer-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <p><b>Alergias:</b></p>
+
+      <ion-buttons slot="end">
+        <ion-button slot="icon-only" *ngIf="!this.isEditing" (click)="changeAllergiesEditing()">
+            <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <div *ngIf="!allergiesEditing">
+      <div *ngIf="person.medicalRecord.allergies.length <= 0">
+        <p style="text-align: center;">No hay agregadas alergias</p>
+      </div>
+
+      <div *ngIf="person.medicalRecord.allergies.length > 0">
+        <ion-chip style="margin-left: 15px;" *ngFor="let allergie of allergies">
+          <ion-icon name="thermometer-outline"></ion-icon>
+          <p>{{allergie}}</p>
+        </ion-chip>
+      </div>
+
+      <ion-item>
+
+      </ion-item>
+    </div>
+
+    <div *ngIf="allergiesEditing">
+      <ion-item lines="none">
+        <ion-buttons>
+          <ion-button>
+              <ion-icon name="thermometer-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        
+        <p><b>Alergias:</b></p>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelUpdate()">
+            <ion-icon color="danger" name="close-circle"></ion-icon>
+          </ion-button>
+          <ion-button (click)="savePerson()">
+              <ion-icon color="success" name="checkmark-circle"></ion-icon>
+          </ion-button>
+            <ion-button (click)="addAllergie()">
+              <ion-icon color="tertiary" name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <div *ngIf="person.medicalRecord.allergies.length <= 0">
+        <p style="text-align: center;">Agrega alergias en el botón "<b>+</b>"</p>
+      </div>
+
+      <div *ngFor="let allergie of person.medicalRecord.allergies; let i = index">
+        <div class="individual-input-container" style="display: flex">
+          <ion-input label="" label-placement="floating" fill="outline" [(ngModel)]="allergies[i]"></ion-input>
+          <ion-buttons>
+            <ion-button (click)="removeAllergie(i)">
+              <ion-icon color="tertiary" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+    </div>
+
+    <ion-item lines="none" *ngIf="!chronicConditionsEditing">    
+      <ion-buttons>
+        <ion-button >
+            <ion-icon name="bandage-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <p><b>Enfermedades Crónicas:</b></p>
+
+      <ion-buttons slot="end">
+        <ion-button slot="icon-only" *ngIf="!this.isEditing" (click)="changeChronicConditionsEditing()">
+            <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <div *ngIf="!chronicConditionsEditing">
+      <div *ngIf="person.medicalRecord.chronicConditions.length <= 0">
+        <p style="text-align: center;">No hay agregadas enfermedades crónicas</p>
+      </div>
+
+      <div *ngIf="person.medicalRecord.chronicConditions.length > 0">
+        <ion-chip style="margin-left: 15px;" *ngFor="let chronicCondition of chronicConditions">
+          <ion-icon name="bandage-outline"></ion-icon>
+          <p>{{chronicCondition}}</p>
+        </ion-chip>
+      </div>
+
+      <ion-item>
+
+      </ion-item>
+    </div>  
+
+    <div *ngIf="chronicConditionsEditing">
+      <ion-item lines="none">
+        <ion-buttons>
+          <ion-button>
+              <ion-icon name="bandage-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        
+        <p><b>Enfermedades Crónicas:</b></p>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="cancelUpdate()">
+            <ion-icon color="danger" name="close-circle"></ion-icon>
+          </ion-button>
+          <ion-button (click)="savePerson()">
+              <ion-icon color="success" name="checkmark-circle"></ion-icon>
+          </ion-button>
+            <ion-button (click)="addChronicCondition()">
+              <ion-icon color="tertiary" name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <div *ngIf="person.medicalRecord.chronicConditions.length <= 0">
+        <p style="text-align: center;">Agrega enfermedades crónicas en el botón "<b>+</b>"</p>
+      </div>
+
+      <div *ngFor="let chronicCondition of person.medicalRecord.chronicConditions; let i = index">
+        <div class="individual-input-container" style="display: flex">
+          <ion-input label="" label-placement="floating" fill="outline" [(ngModel)]="chronicConditions[i]"></ion-input>
+          <ion-buttons>
+            <ion-button (click)="removeChronicCondition(i)">
+              <ion-icon color="tertiary" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+    </div>
+
+    <ion-item lines="none" *ngIf="!medicationsEditing">    
+      <ion-buttons>
+        <ion-button>
+            <ion-icon name="medkit-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <p><b>Medicamentos:</b></p>
+
+      <ion-buttons slot="end">
+        <ion-button slot="icon-only" *ngIf="!this.isEditing" (click)="openMedicationPage()">
+            <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <div *ngIf="!medicationsEditing">
+      <div *ngIf="person.medicalRecord.medications.length <= 0">
+        <p style="text-align: center;">No hay agregados Medicamentos</p>
+      </div>
+
+      <div *ngIf="person.medicalRecord.medications.length > 0">
+        <div>
+          <ion-chip style="margin-left: 15px;" *ngFor="let medication of medications">
+            <p>{{medication.name}}</p>
+          </ion-chip>
+        </div>
+
+      </div>
+
+      <ion-item style="margin-bottom: 10px;">
+
+      </ion-item>
+    </div>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="!loading && medicationPage">
+  <div>
+    <div *ngIf="!medicationEditing">
+      <ion-item (click)="addMedication()" style="cursor: pointer;">
+        <p>Agregar medicamento</p>
+        <ion-buttons slot="end">
+          <ion-button slot="icon-only">
+            <ion-icon color="tertiary" name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </div>
+    <div *ngFor="let medication of person.medicalRecord.medications; let i = index">
+      <div style="width:90%; margin-left: 5%; display: flex;" *ngIf="onEditionIndex != i">
+        <div style="width: 80%;">
+          <p><b>Nombre:</b> {{medication.name}}</p>
+          <ion-chip><p><b>Dosis:</b> {{medication.dosage}}</p></ion-chip>
+          <ion-chip><p><b>Recetado por:</b> {{medication.prescribedBy}}</p></ion-chip>
+          <ion-chip><p><b>Fecha de inicio:</b> {{medication.prescribedBy}}</p></ion-chip>
+          <ion-chip><p><b>Fecha de final:</b> {{medication.prescribedBy}}</p></ion-chip>
+        </div>
+        <div style="width: 20%; margin-top: 5px;">
+          <ion-buttons slot="end">
+            <ion-button *ngIf="!medicationEditing" slot="icon-only" (click)="changeMedicationEditing(i)">
+                <ion-icon name="pencil"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="!medicationEditing" slot="icon-only" (click)="confirmDeleteMedication(i)">
+              <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+      <div style="width:90%; margin-left: 5%; display: flex;" *ngIf="onEditionIndex == i">
+        <div style="width: 80%;">
+          <div class="individual-input-container" style="display: flex">
+            <ion-input label="Nombre" label-placement="floating" fill="outline" [(ngModel)]="medication.name"></ion-input>          
+          </div>
+          <div class="individual-input-container" style="display: flex">
+            <ion-input label="Dosis" label-placement="floating" fill="outline" [(ngModel)]="medication.dosage"></ion-input>          
+          </div>
+          <div class="individual-input-container" style="display: flex">
+            <ion-input label="Recetado por" label-placement="floating" fill="outline" [(ngModel)]="medication.prescribedBy"></ion-input>          
+          </div>
+          <div class="individual-input-container" style="display: flex">
+            <ion-input label="Fecha de inicio DD/MM/YYYY" label-placement="floating" fill="outline" [(ngModel)]="medication.startDate"></ion-input>          
+          </div>
+          <div class="individual-input-container" style="display: flex">
+            <ion-input label="Fecha de finalización DD/MM/YYYY" label-placement="floating" fill="outline" [(ngModel)]="medication.endDate"></ion-input>          
+          </div>
+        </div>
+        <div style="width: 20%; margin-top: 5px;">
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelUpdate()">
+              <ion-icon color="danger" name="close-circle"></ion-icon>
+            </ion-button>
+            <ion-button (click)="savePerson()">
+                <ion-icon color="success" name="checkmark-circle"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </div>
+      <hr class="line">
+    </div>
+  </div>
+</ion-content>
+
+<ion-content  [fullscreen]="true" *ngIf="loading">
+  <div class="loading"></div>
+</ion-content>

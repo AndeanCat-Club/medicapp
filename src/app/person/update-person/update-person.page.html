@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{pageTitle}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" slot="md">
+  <form [formGroup]="personForm">
+    <div class="individual-input-container">
+      <ion-input slot="md" label="Nombre" label-placement="floating" fill="outline" formControlName="firstName" name="firstName" required></ion-input>          
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Segundo Nombre (* Opcional)" label-placement="floating" fill="outline" formControlName="middleName" name="middleName"></ion-input>          
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Apellido" label-placement="floating" fill="outline" formControlName="lastName" name="lastName" required></ion-input>
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Segundo Apellido (* Opcional)" label-placement="floating" fill="outline" formControlName="secondLastName" name="secondLastName"></ion-input>
+    </div>
+
+    <div class="individual-input-container">
+      <div class="date-container">
+        <p class="date-title">Fecha de Nacimiento: </p>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </div>
+    </div>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime locale="es-ES" [max]="maxTime" id="datetime" formControlName="birthDate" name="birthDate"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <div class="individual-input-container">
+      <ion-input label="Rut / DNI" label-placement="floating" fill="outline" formControlName="rut" name="rut" required></ion-input>
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Teléfono de Emergencia (* Opcional)" label-placement="floating" fill="outline" formControlName="emergencyContact" name="emergencyContact"></ion-input>
+    </div>
+  </form>
+
+  <div class="button-container">
+    <button *ngIf="!loadingButton" class="confirm-button" (click)="confirmUpdate()" size="medium" [disabled]="!personForm.valid">{{pageTitle}}</button>
+    <button *ngIf="loadingButton" class="confirm-button" size="medium"><ion-spinner color="light"></ion-spinner></button>
+  </div>
+</ion-content>

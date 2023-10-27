@@ -2,20 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, AlertController, ActionSheetController, NavParams } from '@ionic/angular';
 import { FormBuilder, Validators} from '@angular/forms';
 import { PersonService } from 'src/app/_services/person.service';
+import { Person } from 'src/app/_types/person.types';
 
 @Component({
-  selector: 'app-create-person',
-  templateUrl: './create-person.page.html',
-  styleUrls: ['./create-person.page.scss'],
+  selector: 'app-update-person',
+  templateUrl: './update-person.page.html',
+  styleUrls: ['./update-person.page.scss'],
 })
-
-export class CreatePersonPage implements OnInit {
-  pageTitle: string = 'Agregar Persona'
-  personForm;
+export class UpdatePersonPage implements OnInit {
+  pageTitle: string = 'Actualizar Persona'
+  personForm: any;
   loadingButton = false;
   maxTime = new Date().toISOString()
+  person: Person
 
-  constructor(private formBuilder: FormBuilder, private personService: PersonService, private modalController: ModalController, private alertController: AlertController, private toastController: ToastController) {
+  constructor(private formBuilder: FormBuilder, private toastController: ToastController, private navParams: NavParams, private alertController: AlertController, private modalController: ModalController, private personService: PersonService) { 
+    this.person = navParams.get('param');
+
     this.personForm = this.formBuilder.group({
       firstName : ['',[Validators.required]],
       middleName : [''], 
@@ -25,15 +28,27 @@ export class CreatePersonPage implements OnInit {
       birthDate: [new Date().toISOString()],
       rut: ['', [Validators.required]]
     }); 
+
+    if (this.person) {
+      this.startForm(this.person)
+    }
   }
 
   ngOnInit() {
   }
 
-  async confirmCreate() {
+  startForm(person: any){
+    for(let index in person){
+      if(this.personForm.controls[index]){
+        this.personForm.controls[index].setValue(person[index]);
+      }                    
+    }
+  }
+
+  async confirmUpdate() {
     const alert = await this.alertController.create({
       header: 'Favor confirmar!',
-      message: 'Estas a punto de agregar una Persona!!!',
+      message: 'Estas a punto de actualizar una Persona!!!',
       buttons: [
         {
           text: 'Cancelar',
@@ -56,8 +71,7 @@ export class CreatePersonPage implements OnInit {
 
   async savePerson(){
     this.loadingButton = true;
-    const person: any = this.personForm.value;
-    this.personService.insert(person).subscribe((_: any) => {
+    this.personService.update(this.person._id, this.personForm.value).subscribe((_: any) => {
       this.loadingButton = false;
       this.personForm.reset();
       this.toastSuccess();
@@ -70,7 +84,7 @@ export class CreatePersonPage implements OnInit {
 
   async toastSuccess() {
     const toast = await this.toastController.create({
-      message: 'Persona agregada correctamente 🎉🎉🎉',
+      message: 'Persona actualizada correctamente 🎉🎉🎉',
       duration: 2000
     });
     toast.present();
@@ -78,7 +92,7 @@ export class CreatePersonPage implements OnInit {
   
   async toastError() {
     const toast = await this.toastController.create({
-      message: 'Error al agregar persona, error de conexión probablemente 🤔',
+      message: 'Error al actualizar persona 🤔',
       duration: 2000
     });
     toast.present();

@@ -20,14 +20,14 @@
     <ion-item> 
       <ion-toolbar class="ion-toolbar">
         <ion-searchbar class="custom" placeholder="Buscar" (ionInput)="searchPerson($event)"></ion-searchbar>
-        <ion-buttons class="cellphone" slot="end" (click)="createPerson()">
+        <ion-buttons class="cellphone" slot="end" (click)="openModal('create')">
           <ion-button>
             <ion-icon slot="icon-only" name="add-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
 
-      <button class="button-create desktop" (click)="createPerson()">
+      <button class="button-create desktop" (click)="openModal('create')">
         Agregar persona
       </button>
     </ion-item>

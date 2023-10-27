@@ -1,0 +1,39 @@
+ion-toolbar{
+    --background: #4573ea !important;
+    text-align: center;
+    color: white;
+  }
+  
+.header-md::after{
+  width: 0% !important;
+}
+
+.person-circle-container{
+    width: 35%;
+    margin-left: 32.5%;
+    margin-top: 20px;
+}
+
+.person-circle{
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 200px;
+}
+
+.person-name{
+    text-align: center;
+    font-size: 18px;
+}
+
+.individual-input-container{
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.line{
+  width: 95%;
+  margin-left: 5%;
+  border-bottom: 1px solid #d2d1d1;
+}

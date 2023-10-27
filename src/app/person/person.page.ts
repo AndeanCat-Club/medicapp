@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../_services/person.service'
 import { UtilService } from '../_services/utils.service';
-import { ModalController, AlertController, ActionSheetController } from '@ionic/angular';
+import { ModalController, AlertController, ActionSheetController, ToastController } from '@ionic/angular';
 import { CreatePersonPage } from './create-person/create-person.page';
+import { UpdatePersonPage } from './update-person/update-person.page';
+import { MedicInformationPage } from './medic-information/medic-information.page';
 import { Person } from '../_types/person.types';
+
+
+type ComponentName = 'create' | 'update' | 'information'
+
 
 @Component({
   selector: 'app-person',
@@ -19,7 +25,7 @@ export class PersonPage implements OnInit {
 
   loading = false
 
-  constructor(private personService: PersonService, private utilService: UtilService, private actionSheetController: ActionSheetController, private modalController: ModalController) { }
+  constructor(private personService: PersonService, private utilService: UtilService, private actionSheetController: ActionSheetController, private toastController: ToastController, private alertController: AlertController, private modalController: ModalController) { }
 
   async ngOnInit() {
     this.loading = true;
@@ -69,10 +75,19 @@ export class PersonPage implements OnInit {
     });
   }
 
-  async createPerson() {
+  async openModal(componentName: ComponentName, param?: any) {
+    const components = {
+      'create': CreatePersonPage,
+      'update': UpdatePersonPage,
+      'information': MedicInformationPage
+    }
+    
     const modal = await this.modalController.create({
-      component: CreatePersonPage,
-      cssClass: 'modals'
+      component: components[componentName],
+      cssClass: 'modals',
+      componentProps: {
+        param
+      }
     });
 
     modal.onDidDismiss().then(modal => {
@@ -84,18 +99,11 @@ export class PersonPage implements OnInit {
 
   async options(person: Person) {
     console.log('person:', person)
-    let option = person.status ? 'Desactivar' : 'Recuperar'
+    let option: string = person.status ? 'Desactivar' : 'Activar'
 
     const options = {
       header: 'Opciones',
       buttons: [
-        {
-          text: 'Actualizar información Médica',
-          icon: 'clipboard-outline',
-          handler: () => {
-
-          }
-        },
         {
           text: 'Ver Código QR',
           icon: 'qr-code-outline',
@@ -104,23 +112,38 @@ export class PersonPage implements OnInit {
           }
         },
         {
+          text: 'Actualizar información Médica',
+          icon: 'clipboard-outline',
+          handler: () => {
+            this.openModal('information', person)
+          }
+        },
+        {
           text: 'Editar persona',
           icon: 'id-card-outline',
           handler: () => {
-
+            this.openModal('update', person)
           }
         },
         {
           text: option,
           role: 'destructive',
-          icon: 'trash-outline',
+          icon: 'eye-off-outline',
           handler: () => {
             if (person.status == false) {
-              //this.confirmDelete('recuperar', area);
+              this.confirmDesactivation(option, person);
             }
             else {
-              //this.confirmDelete('borrar', area);
+              this.confirmDesactivation(option, person);
             }
+          }
+        },
+        {
+          text: 'Borrar permanente',
+          role: 'destructive',
+          icon: 'trash-outline',
+          handler: () => {
+            this.confirmDelete(person);
           }
         },
         {
@@ -135,5 +158,101 @@ export class PersonPage implements OnInit {
 
     const actionSheet = await this.actionSheetController.create(options);
     await actionSheet.present();
+  }
+
+  async confirmDesactivation(option: string, person: Person) {
+    const alert = await this.alertController.create({
+      header: 'Favor confirmar!',
+      message: `Estas a punto de ${option} una persona!!!`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {}
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.updatePersonStatus(person)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async confirmDelete(person: Person) {
+    const alert = await this.alertController.create({
+      header: 'Favor confirmar!',
+      message: `Estas a punto de borrar una persona, esta acción será irreversible!!!`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {}
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.deletePerson(person)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  updatePersonStatus(person: Person){
+    this.personService.changeStatus(person).subscribe(result => {
+      this.toastSuccess();
+      this.ngOnInit();
+    }, () => {
+      this.toastError();
+      this.ngOnInit();
+    })
+  }
+
+  deletePerson(person: Person){
+    this.personService.deletePerson(person).subscribe(result => {
+      this.toastDeleteSuccess();
+      this.ngOnInit();
+    }, () => {
+      this.toastDeleteError();
+      this.ngOnInit();
+    })
+  }
+
+  async toastSuccess() {
+    const toast = await this.toastController.create({
+      message: 'Persona desactivada correctamente',
+      duration: 2000
+    });
+    toast.present();
+  }
+  
+  async toastError() {
+    const toast = await this.toastController.create({
+      message: 'Error al desactivar persona',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async toastDeleteSuccess() {
+    const toast = await this.toastController.create({
+      message: 'Persona borrada de forma permanente',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async toastDeleteError() {
+    const toast = await this.toastController.create({
+      message: 'Error al borrar persona',
+      duration: 2000
+    });
+    toast.present();
   }
 }

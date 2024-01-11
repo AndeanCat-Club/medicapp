@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   host: 'https://medicapi-aq6tp.ondigitalocean.app',
-  qrApi: 'http://localhost:8080'
+  qrApi: 'http://159.223.150.42:8080'
 };
 
 /*

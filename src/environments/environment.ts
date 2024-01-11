@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'https://medicapi-aq6tp.ondigitalocean.app'
+  host: 'https://medicapi-aq6tp.ondigitalocean.app',
+  qrApi: 'http://localhost:8080'
 };
 
 /*

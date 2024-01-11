@@ -1,0 +1,126 @@
+.principal-container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-container {
+    width: 40%;
+    background-color: #4573ea;
+    background-image: url('https://rabbit.io/static/media/sign-up.cd9d2548.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.right-container {
+    width: 60%;
+}
+
+
+/* login */
+
+.title-role {
+    font-size: 20px;
+    color: #0e1538;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    margin: 0px;
+}
+
+
+.login-form-container {
+    /* background: black; */
+    width: 50%;
+    margin-top: calc(50%/2);
+    margin-left: calc(50%/2);
+    animation: left-in .5s ease-in;
+}
+
+
+.input-container {
+    padding-top: 2%;
+    padding-bottom: 1%;
+    margin-top: 3%;
+    // border-radius: 6px;
+    // background-color: rgb(233, 230, 230);
+}
+
+.text-register-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.text-register {
+    cursor: pointer;
+    color: #333333;
+}
+
+.text-register-marked {
+    color: #0161cd;
+    font-weight: 500;
+}
+
+.login-button-container {
+    margin-top: 10%;
+}
+
+.login-button {
+    font-family: "Roboto", sans-serif;
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 100%;
+    margin-left: 0%;
+    border: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color: #4573ea;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+@keyframes left-in {
+    0% {
+        transform: translateX(200%);
+    }
+
+    50% {
+        transform: translateX(100%);
+    }
+
+    70% {
+        transform: translateX(50%);
+    }
+
+    80% {
+        transform: translateX(25%);
+    }
+
+    90% {
+        transform: translateX(5%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@media (max-width: 900px) {
+    .left-container {
+        display: none; /* or adjust its width or visibility */
+    }
+
+    .right-container {
+        width: 100%;
+    }
+
+    .login-form-container {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 40%; /* Adjust margin accordingly */
+    }
+    
+}

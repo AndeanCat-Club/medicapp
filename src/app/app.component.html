@@ -1,6 +1,7 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+  <ion-split-pane contentId="main-content" [when]="menuFlag">
+    <ion-menu contentId="main-content" type="overlay" id="menux">
+
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Medicapp</ion-list-header>
@@ -10,14 +11,15 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-            <ion-item style="cursor: pointer;">
+            <ion-item style="cursor: pointer;" (click)="logOut()">
               <ion-icon aria-hidden="true" slot="start" ios="power" md="power"></ion-icon>
               <ion-label>Cerrar sesión</ion-label>
             </ion-item>
         </ion-list>
-        <ion-note style="background-color: #4573ea; vertical-align: bottom;">made with love ♥ by <br><b>andeancat.club</b></ion-note>
+        <a href="https://www.andeancat.club" target="_blank"><ion-note style="background-color: #4573ea; cursor: pointer; vertical-align: bottom;">Echo con cariño ♥ por <br><b>andeancat.club</b></ion-note></a>
       </ion-content>
     </ion-menu>
+
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

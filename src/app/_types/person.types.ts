@@ -10,6 +10,7 @@ export interface Person {
     status: Boolean
     medicalRecord: MedicalRecord
     userId: String
+    publicCode?: String 
   }
 
   interface MedicalRecord {

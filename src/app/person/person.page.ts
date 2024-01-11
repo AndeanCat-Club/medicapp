@@ -6,9 +6,10 @@ import { CreatePersonPage } from './create-person/create-person.page';
 import { UpdatePersonPage } from './update-person/update-person.page';
 import { MedicInformationPage } from './medic-information/medic-information.page';
 import { Person } from '../_types/person.types';
+import { GenerateQrPage } from './generate-qr/generate-qr.page';
 
 
-type ComponentName = 'create' | 'update' | 'information'
+type ComponentName = 'create' | 'update' | 'information' | 'qr'
 
 
 @Component({
@@ -29,12 +30,12 @@ export class PersonPage implements OnInit {
 
   async ngOnInit() {
     this.loading = true;
-    this.personService.listByUserId().subscribe((persons: Person[]) => {
-      
+    const list = await this.personService.listByUserId()
+    list.subscribe((persons: Person[]) => {
       if (persons.length) {
-         
-        this.activePersons = persons.filter( person => person.status)
-        this.desactivatedPersons = persons.filter( person => !person.status)
+
+        this.activePersons = persons.filter(person => person.status)
+        this.desactivatedPersons = persons.filter(person => !person.status)
         this.listActivePersons()
       }
       this.loading = false
@@ -63,7 +64,7 @@ export class PersonPage implements OnInit {
 
   searchPerson(event: any) {
     const searchTerm = event.target.value.toLowerCase();
-    
+
     this.persons = this.originalPersons.filter((person: Person) => {
       for (const key of Object.keys(person) as (keyof Person)[]) {
         const value = person[key];
@@ -79,9 +80,10 @@ export class PersonPage implements OnInit {
     const components = {
       'create': CreatePersonPage,
       'update': UpdatePersonPage,
-      'information': MedicInformationPage
+      'information': MedicInformationPage,
+      'qr': GenerateQrPage
     }
-    
+
     const modal = await this.modalController.create({
       component: components[componentName],
       cssClass: 'modals',
@@ -108,7 +110,7 @@ export class PersonPage implements OnInit {
           text: 'Ver Código QR',
           icon: 'qr-code-outline',
           handler: () => {
-
+            this.openModal('qr', person)
           }
         },
         {
@@ -169,7 +171,7 @@ export class PersonPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {}
+          handler: () => { }
         }, {
           text: 'Okay',
           handler: () => {
@@ -191,7 +193,7 @@ export class PersonPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {}
+          handler: () => { }
         }, {
           text: 'Okay',
           handler: () => {
@@ -204,7 +206,7 @@ export class PersonPage implements OnInit {
     await alert.present();
   }
 
-  updatePersonStatus(person: Person){
+  updatePersonStatus(person: Person) {
     this.personService.changeStatus(person).subscribe(result => {
       this.toastSuccess();
       this.ngOnInit();
@@ -214,7 +216,7 @@ export class PersonPage implements OnInit {
     })
   }
 
-  deletePerson(person: Person){
+  deletePerson(person: Person) {
     this.personService.deletePerson(person).subscribe(result => {
       this.toastDeleteSuccess();
       this.ngOnInit();
@@ -231,7 +233,7 @@ export class PersonPage implements OnInit {
     });
     toast.present();
   }
-  
+
   async toastError() {
     const toast = await this.toastController.create({
       message: 'Error al desactivar persona',

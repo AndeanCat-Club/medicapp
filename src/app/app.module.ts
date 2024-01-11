@@ -11,13 +11,20 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { PersonService } from './_services/person.service';
 import { UtilService } from './_services/utils.service';
+import { AuthService } from './_services/auth.service';
+import { StorageService } from './_services/storage.service';
+import { SessionService } from './_services/session.service';
+import { QrService } from './_services/qr.service';
+
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     mode: 'md'
-  }), HttpClientModule, AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService],
+  }), HttpClientModule, AppRoutingModule, IonicStorageModule.forRoot()],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService, AuthService, SessionService, StorageService, QrService],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

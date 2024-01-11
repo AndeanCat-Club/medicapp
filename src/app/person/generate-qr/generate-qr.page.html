@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="hithere" (click)="moreInfo()" color="light">
+        <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Código QR de la Persona</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <div class="qr-container">
+    <div class="person-name-container">
+      <p class="person-name"><b>{{person.firstName}} {{person.middleName}} {{person.lastName}} {{person.secondLastName}}</b></p>
+      <div class="qr-image-container">
+        <img class="qr-image" [src]="qrImageUrl" alt="Imagen Blob" *ngIf="!loadingImage">
+        <ion-spinner  *ngIf="loadingImage"></ion-spinner>
+      </div>
+    </div>
+  </div>
+
+    <ion-item lines="none">      
+      <p><b>Opciones:</b></p>
+    </ion-item>
+
+    <ion-item style="cursor: pointer" (click)="generateNewPublicCode()">
+      <ion-buttons>
+        <ion-button>
+            <ion-icon name="reload-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
+      <p>Cambiar código QR</p>
+    </ion-item>
+    
+    <ion-item style="cursor: pointer" (click)="downloadQr()">
+      <ion-buttons>
+        <ion-button>
+            <ion-icon name="cloud-download-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      
+      <p>Descargar QR</p>
+    </ion-item>
+
+    <ion-item lines="none">
+
+    </ion-item>
+</ion-content>
+
+<ion-content  [fullscreen]="true" *ngIf="loading">
+  <div class="loading"></div>
+</ion-content>

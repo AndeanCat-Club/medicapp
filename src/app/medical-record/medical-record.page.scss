@@ -1,0 +1,18 @@
+ion-content {
+    --background: #d1ddf6;
+}
+
+ion-toolbar {
+    --background: white !important;
+    text-align: center;
+}
+
+.header-md::after {
+    width: 0% !important;
+}
+
+.ion-toolbar {
+    --background: white !important;
+    color: #0e1538;
+    text-align: center;
+}

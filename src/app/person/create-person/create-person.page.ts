@@ -57,7 +57,8 @@ export class CreatePersonPage implements OnInit {
   async savePerson(){
     this.loadingButton = true;
     const person: any = this.personForm.value;
-    this.personService.insert(person).subscribe((_: any) => {
+    const insertPerson = await this.personService.insert(person)
+    insertPerson.subscribe((_: any) => {
       this.loadingButton = false;
       this.personForm.reset();
       this.toastSuccess();

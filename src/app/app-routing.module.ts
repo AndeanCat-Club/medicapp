@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './_services/authGuard.service';
+import { InverseAuthGuard } from './_services/inverseAuthGuard.service';
 
 const routes: Routes = [
   {
@@ -9,16 +11,29 @@ const routes: Routes = [
   },
   {
     path: 'person',
-    loadChildren: () => import('./person/person.module').then( m => m.PersonPageModule)
+    loadChildren: () => import('./person/person.module').then( m => m.PersonPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate: [InverseAuthGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
-  }
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
+    canActivate: [InverseAuthGuard]
+  },
+  {
+    path: 'medical-record',
+    loadChildren: () => import('./medical-record/medical-record.module').then( m => m.MedicalRecordPageModule),
+    canActivate: []
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

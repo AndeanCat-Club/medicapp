@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
   <div class="data-container" *ngIf="!loading">
     <ion-item style="padding-top: 10px" lines="none">
       <h1 class="title-role">Personas</h1>
@@ -17,7 +17,7 @@
       <p class="subtitle-role">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem non quo animi</p>
     </ion-item>-->
 
-    <ion-item> 
+    <ion-item>
       <ion-toolbar class="ion-toolbar">
         <ion-searchbar class="custom" placeholder="Buscar" (ionInput)="searchPerson($event)"></ion-searchbar>
         <ion-buttons class="cellphone" slot="end" (click)="openModal('create')">
@@ -48,7 +48,8 @@
         <ion-avatar>
           <img src="https://avatars.githubusercontent.com/u/52795648?v=4">
         </ion-avatar>
-        <ion-label style="margin-left: 20px;" *ngIf="person.firstName && person.lastName"><b>{{person.firstName}} {{person.lastName}}</b></ion-label>
+        <ion-label style="margin-left: 20px;" *ngIf="person.firstName && person.lastName"><b>{{person.firstName}}
+            {{person.lastName}}</b></ion-label>
         <ion-buttons slot="end">
           <ion-button>
             <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
@@ -74,11 +75,17 @@
         </ion-chip>
       </div>
     </div>
-    
-    <ion-item  *ngIf="persons.length === 0">
+
+    <ion-item *ngIf="persons.length === 0">
       <p>No tienes agregadas personas aún...</p>
     </ion-item>
   </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="!loading">
+    <ion-fab-button (click)="openModal('create')">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <div class="data-container" *ngIf="loading">
     <div class="loading"></div>

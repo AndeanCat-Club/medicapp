@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'medic-information',
     loadChildren: () => import('./medic-information/medic-information.module').then( m => m.MedicInformationPageModule)
+  },
+  {
+    path: 'generate-qr',
+    loadChildren: () => import('./generate-qr/generate-qr.module').then( m => m.GenerateQrPageModule)
   }
 ];
 

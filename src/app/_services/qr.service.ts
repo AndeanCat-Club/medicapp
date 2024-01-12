@@ -7,19 +7,21 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class QrService {
-  private baseUrl: string = environment.qrApi || 'http://localhost:8080';
+  private baseUrl: string = environment.host || 'http://localhost:3000';
   private ownDomain: string = `${window.location.href}/medical-record` || 'http://localhost:8100/medical-record';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   generateQRCode(data: String | undefined): Observable<any> {
-    const url = `${this.baseUrl}/post-generate-qr?data=${this.ownDomain}?code=${data}`;
+    const finalData = `${this.ownDomain}?code=${data}`
+    const body = { data: finalData };
+    const url = `${this.baseUrl}/person/generateQRCode/`;
 
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       responseType: 'blob' as 'json'
     };
 
-    return this.http.post(url, null, options);
+    return this.http.post(url, body, options);
   }
 }

@@ -5,6 +5,77 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <h1>esto funciona solo es un test</h1>
-  <p>{{person?.firstName}} {{person?.lastName}}</p>
+  <div class="person-profile">
+    <div class="person-circle-container">
+      <img class="person-circle" src="https://avatars.githubusercontent.com/u/52795648?v=4">
+    </div>
+
+    <div class="person-name-container">
+      <p class="person-name"><b>{{person?.firstName}} {{person?.middleName}} {{person?.lastName}} {{person?.secondLastName}}</b></p>
+    </div>
+
+    <div class="resume-container" style="padding-bottom: 10px; padding-top: 10px;">
+      <ion-chip style="margin-left: 15px;" *ngIf="person?.rut">
+        <ion-icon name="id-card-outline"></ion-icon>
+        <ion-label><b>ID</b>: {{person?.rut}}</ion-label>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person?.birthDate">
+        <ion-icon name="egg-outline"></ion-icon>
+        <p><b>Cumpleaños</b>: {{calculateDate(person?.birthDate)}}</p>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person?.birthDate">
+        <ion-icon name="egg-outline"></ion-icon>
+        <p><b>Edad</b>: {{calculateAge(person?.birthDate)}}</p>
+      </ion-chip>
+      <ion-chip style="margin-left: 15px;" *ngIf="person?.emergencyContact">
+        <ion-icon name="call-outline"></ion-icon>
+        <p><b>Número de emergencia</b>: {{person?.emergencyContact}}</p>
+      </ion-chip>
+
+      <div *ngIf="person">
+        <p><b>Alergias:</b></p>
+  
+        <div *ngIf="person.medicalRecord.allergies.length > 0">
+          <ion-chip style="margin-left: 15px;" *ngFor="let allergie of person?.medicalRecord?.allergies">
+            <ion-icon name="thermometer-outline"></ion-icon>
+            <p>{{allergie}}</p>
+          </ion-chip>
+        </div>
+    
+        <ion-item>
+    
+        </ion-item>
+      </div>
+
+      <div *ngIf="person">
+        <p><b>Enfermedades Crónicas:</b></p>
+  
+        <div *ngIf="person.medicalRecord.chronicConditions.length > 0">
+          <ion-chip style="margin-left: 15px;" *ngFor="let allergie of person?.medicalRecord?.chronicConditions">
+            <ion-icon name="thermometer-outline"></ion-icon>
+            <p>{{allergie}}</p>
+          </ion-chip>
+        </div>
+    
+        <ion-item>
+    
+        </ion-item>
+      </div>
+
+      <div *ngIf="person">
+        <p><b>Medicamentos:</b></p>
+  
+        <div *ngIf="person.medicalRecord.medications.length > 0">
+          <ion-chip style="margin-left: 15px;" *ngFor="let medication of person?.medicalRecord?.medications">
+            <ion-icon name="thermometer-outline"></ion-icon>
+            <p>{{medication.name}}</p>
+          </ion-chip>
+        </div>
+    
+        <ion-item>
+    
+        </ion-item>
+      </div>
+    </div>
+  </div>
 </ion-content>

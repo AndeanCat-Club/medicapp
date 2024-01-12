@@ -73,7 +73,7 @@ export class GenerateQrPage implements OnInit {
   async moreInfo(){
     const alert = await this.alertController.create({
       header: 'Atención!',
-      message: 'Este código sirve para tú compartir información médica de manera pública... Siempre puedes actualizar el código en las ópciones más abajo (El código anterior dejará de ser válido)',
+      message: 'Este código sirve para tú compartir información médica de manera pública... Siempre puedes actualizar el código en las opciones más abajo (El código anterior dejará de ser válido)',
       buttons: [{
           text: 'Okay',
           handler: () => {

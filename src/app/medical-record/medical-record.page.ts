@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { PersonService } from '../_services/person.service';
 import { Person } from '../_types/person.types';
+import { UtilService } from '../_services/utils.service';
 
 @Component({
   selector: 'app-medical-record',
@@ -14,7 +15,7 @@ export class MedicalRecordPage implements OnInit {
   loading: boolean = false;
   person: Person | undefined;
 
-  constructor(private route: ActivatedRoute, private toastController: ToastController, private personService: PersonService ) { 
+  constructor(private route: ActivatedRoute, private toastController: ToastController, private personService: PersonService, private utilService: UtilService ) { 
     if(this.route.snapshot.queryParams['code']){
       this.route.queryParams.subscribe( params =>{
         this.codePerson = params['code'];
@@ -44,6 +45,14 @@ export class MedicalRecordPage implements OnInit {
 
   getPersonByPublicCode(){
 
+  }
+
+  calculateAge(birthDate: Date | undefined) {
+    return this.utilService.calculateAge(birthDate)
+  }
+
+  calculateDate(date: Date | undefined) {
+    return this.utilService.calculateDate(date)
   }
 
 }

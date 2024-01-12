@@ -14,7 +14,7 @@ export class AppComponent {
     { title: 'Mascotas... proximamente', url: '/pet', icon: 'paw' }
   ];
   menuFlag = false
-
+  
   constructor(private sessionService: SessionService, private router: Router, private storageService: StorageService){
 
   }

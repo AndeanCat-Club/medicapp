@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { User } from '../_types/user.types';
 import { AuthService } from '../_services/auth.service';
 import { SessionService } from '../_services/session.service';
+import { ValidationService } from '../_services/validation.service';
 
 @Component({
   selector: 'app-register',
@@ -15,11 +16,11 @@ import { SessionService } from '../_services/session.service';
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private router: Router, private registerService: RegisterService, private toastController: ToastController,  private authService: AuthService, private sessionService: SessionService) { 
+  constructor(private formBuilder:FormBuilder, private router: Router, private validationService: ValidationService, private registerService: RegisterService, private toastController: ToastController,  private authService: AuthService, private sessionService: SessionService) { 
     this.registerForm = this.formBuilder.group({
       name : ['',[Validators.required]],
       phone : ['',[Validators.required]],
-      email : ['',[Validators.required]],
+      email : ['',[Validators.required, this.validationService.emailValidator]],
       password : ['',Validators.required]
     }); 
   }

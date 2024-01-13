@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../_services/auth.service';
 import { SessionService } from '../_services/session.service';
+import { ValidationService } from '../_services/validation.service';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,9 @@ import { SessionService } from '../_services/session.service';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private toastController: ToastController, private authService: AuthService, private sessionService: SessionService) {
+  constructor(private formBuilder: FormBuilder, private validationService: ValidationService, private router: Router, private toastController: ToastController, private authService: AuthService, private sessionService: SessionService) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, this.validationService.emailValidator]],
       password: ['', Validators.required]
     });
   }

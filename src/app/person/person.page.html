@@ -59,11 +59,11 @@
       <div style=" padding-bottom: 10px;" (click)="options(person)">
         <ion-chip style="margin-left: 15px;" *ngIf="person.rut">
           <ion-icon name="id-card-outline"></ion-icon>
-          <ion-label><b>ID</b>: {{person.rut}}</ion-label>
+          <ion-label><b>Rut/DNI</b>: {{person.rut}}</ion-label>
         </ion-chip>
         <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
           <ion-icon name="egg-outline"></ion-icon>
-          <p><b>Cumpleaños</b>: {{calculateDate(person.birthDate)}}</p>
+          <p><b>Fecha de Nacimiento</b>: {{calculateDate(person.birthDate)}}</p>
         </ion-chip>
         <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
           <ion-icon name="egg-outline"></ion-icon>

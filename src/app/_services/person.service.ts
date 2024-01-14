@@ -8,7 +8,7 @@ import { SessionService } from './session.service';
     providedIn: 'root'
 })
 export class PersonService {
-    private url: string = 'http://localhost:8080' || 'http://localhost:8080';
+    private url: string = environment.host || 'http://localhost:8080';
 
     constructor(private http: HttpClient, private sessionService: SessionService) {
     }

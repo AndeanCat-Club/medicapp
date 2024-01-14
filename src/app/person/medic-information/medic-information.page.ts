@@ -40,9 +40,11 @@ export class MedicInformationPage implements OnInit {
     this.getPerson()
   }
 
-  getPerson() {
+  async getPerson() {
     console.log('me ejecuté')
-    this.personService.getPerson(this.person).subscribe(result => {
+
+    const result = await this.personService.getPerson(this.person)
+    result.subscribe(result => {
       let finalPerson = this.buildPersonMedicalRecord(result)
       console.log('finalPerson:', finalPerson)
       this.person = finalPerson as any

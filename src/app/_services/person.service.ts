@@ -8,7 +8,7 @@ import { SessionService } from './session.service';
     providedIn: 'root'
 })
 export class PersonService {
-    private url: string = environment.host || 'http://localhost:8080';
+    private url: string = 'http://localhost:8080' || 'http://localhost:8080';
 
     constructor(private http: HttpClient, private sessionService: SessionService) {
     }
@@ -23,10 +23,13 @@ export class PersonService {
         });
     }
 
-    getPerson(person: Person){
+    async getPerson(person: Person){
+        const sessionData = await this.sessionService.getSession()
+        const token = sessionData.accessToken
         const personId = person._id;
         return this.http.get<any[]>(`${this.url}/person/${personId}`, {
             headers: new HttpHeaders()
+            .set('Authorization' , `Bearer ${token}`)
             .set('Content-Type', 'application/json')
         });
     }

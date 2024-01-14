@@ -48,9 +48,10 @@ export class GenerateQrPage implements OnInit {
     })
   }
 
-  getPerson() {
+  async getPerson() {
     this.loading = true;
-    this.personService.getPerson(this.person).subscribe((result: any) => {
+    const result = await this.personService.getPerson(this.person)
+    result.subscribe((result: any) => {
       this.person = result;
       this.loading = false
     }, () => {

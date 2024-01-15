@@ -1,3 +1,7 @@
+.header-md::after {
+    width: 0% !important;
+}
+
 .principal-container {
     display: flex;
     height: 100vh;
@@ -110,7 +114,8 @@
 
 @media (max-width: 900px) {
     .left-container {
-        display: none; /* or adjust its width or visibility */
+        display: none;
+        /* or adjust its width or visibility */
     }
 
     .right-container {
@@ -120,7 +125,8 @@
     .login-form-container {
         width: 80%;
         margin-left: 10%;
-        margin-top: 40%; /* Adjust margin accordingly */
+        margin-top: 40%;
+        /* Adjust margin accordingly */
     }
-    
+
 }

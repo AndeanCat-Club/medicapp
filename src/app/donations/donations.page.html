@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Donaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="data-container"><!-- *ngIf="!loading"-->
+    <div class="info-container">
+      <div class="donation-image-container">
+          <img class="image" src="https://media.discordapp.net/attachments/1093087836149919764/1195374249163116575/quire_person_logo_mountain_a6cd9be1-8b9e-452c-9087-9ebfba997e93.png?ex=65b3c205&is=65a14d05&hm=9976eec086f4dd01e5113d7bab967f157777702050c12689c2b13399a01c4120&=&format=webp&quality=lossless&width=1170&height=1170">
+      </div>
+      <h1 class="data-title">Primero que todo, queremos darte las gracias por usar esta app</h1>
+      <p class="desc-title">
+        Nuestras aplicaciones son gratuitas. El apoyo de ustedes nos ayuda a crecer, a producir más aplicaciones, a mantener nuestros servidores y a mejorar nuestra calidad en el desarrollo. Puedes apoyarnos y agregaremos tu nombre en la lista de personas que contribuyeron a mejorar nuestro trabajo y el mundo en el que vivimos.<a class="desc-title" href="https://www.buymeacoffee.com/andeancatclub" target="_blank" style=" text-decoration: none;"><p style="margin-top: 15px; text-align: center;"><b>AndeanCatClub</b></p></a>
+      </p>
+
+      <a href="https://www.buymeacoffee.com/andeancatclub" target="_blank"><button class="donation-button" size="medium">Has click para realizar una contribución</button></a>
+
+      <p class="desc-title" style="padding-top: 10px; padding-bottom: 10px;"><b>o escanea el código qr</b></p>
+
+      <div class="donation-image-container">
+        <img class="image" src="../../assets/buy-coffe-logo.png">
+      </div>
+    </div>
+  </div>
+</ion-content>

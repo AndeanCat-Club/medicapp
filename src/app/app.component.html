@@ -1,23 +1,50 @@
 <ion-app>
   <ion-split-pane contentId="main-content" [when]="menuFlag">
     <ion-menu contentId="main-content" type="overlay" id="menux">
-
       <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Medicapp</ion-list-header>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+        <div *ngIf="menuInfo">
+          <ion-list id="inbox-list">
+            <ion-list-header>Medicapp</ion-list-header>
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+                routerLinkActive="selected">
+                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
+                  [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
             <ion-item style="cursor: pointer;" (click)="logOut()">
               <ion-icon aria-hidden="true" slot="start" ios="power" md="power"></ion-icon>
               <ion-label>Cerrar sesión</ion-label>
             </ion-item>
-        </ion-list>
-        <a href="https://www.andeancat.club" target="_blank"><ion-note style="background-color: #4573ea; cursor: pointer; vertical-align: bottom;">Echo con cariño ♥ por <br><b>andeancat.club</b></ion-note></a>
+          </ion-list>
+        </div>
+
+        <div *ngIf="!menuInfo">
+          <ion-list id="inbox-list">
+            <ion-list-header>Medicapp</ion-list-header>
+            <ion-menu-toggle auto-hide="false" *ngFor="let p of notLoggedPages; let i = index">
+              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+                routerLinkActive="selected">
+                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'"
+                  [md]="p.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+        </div>
+
+        <div class="andean-container">
+          <div class="andean-image-container">
+            <a href="https://www.andeancat.club" target="_blank"><img class="andean-image"
+                src="https://andeancat.club/wp-content/uploads/2023/09/andean-cat-150x150.png"></a>
+          </div>
+          <a class="andean-note" href="https://www.andeancat.club" target="_blank"><p
+              style="background-color: #4573ea; color: white; cursor: pointer; vertical-align: bottom;">Hecho con cariño ♥ por
+              <br><b>andeancat.club</b></p></a>
+        </div>
       </ion-content>
+
     </ion-menu>
 
     <ion-router-outlet id="main-content"></ion-router-outlet>

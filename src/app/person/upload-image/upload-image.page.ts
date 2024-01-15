@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { PersonService } from 'src/app/_services/person.service';
 import { FileService } from 'src/app/_services/file.service';
-import { Person } from 'src/app/_types/person.types';
+import { Person, ImageData } from 'src/app/_types/person.types';
 
 @Component({
   selector: 'app-upload-image',
@@ -23,6 +23,7 @@ export class UploadImagePage implements OnInit {
   ngOnInit() {
     this.loading = true;
     const filePath = this.person?.imageData?.filePath || null
+    console.log('filePath:', filePath);
     if (filePath) {
       this.fileService.readFile(filePath).subscribe((file: any) => {
         if (file) {
@@ -44,7 +45,7 @@ export class UploadImagePage implements OnInit {
     if (!file) {
       return;
     }
-
+    console.log('e:', e);
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -91,11 +92,12 @@ export class UploadImagePage implements OnInit {
 
   updatePage() {
     this.loading = true;
-
     if (this.form) {
       this.fileService.sendFile(this.form).subscribe(value => {
         const person = this.person;
-        person.imageData.filePath = value.filePath;
+        const imageData: ImageData = {filePath: value.filePath.toString()}
+        
+        person['imageData'] = imageData;
         this.personService.update(this.person._id, person).subscribe(res => {
           this.loading = false;
           this.form = null;

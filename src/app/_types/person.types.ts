@@ -16,7 +16,7 @@ export interface Person {
     localImage?: String 
   }
 
-  interface ImageData{
+  export interface ImageData{
     filePath: String
   }
 

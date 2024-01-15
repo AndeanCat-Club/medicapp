@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { PersonService } from 'src/app/_services/person.service';
 import { Person } from 'src/app/_types/person.types';
 import { UtilService } from '../../_services/utils.service';
+import { FileService } from 'src/app/_services/file.service';
 
 @Component({
   selector: 'app-medic-information',
@@ -32,11 +33,29 @@ export class MedicInformationPage implements OnInit {
   loading = true;
   isEditing = false;
 
-  constructor(private formBuilder: FormBuilder, private utilService: UtilService, private toastController: ToastController, private navParams: NavParams, private alertController: AlertController, private modalController: ModalController, private personService: PersonService) {
+  logoUrl = '';
+  loadingImage = true;
+
+  constructor(private formBuilder: FormBuilder, private utilService: UtilService, private toastController: ToastController, private navParams: NavParams, private alertController: AlertController, private modalController: ModalController, private personService: PersonService, private fileService: FileService) {
     this.person = navParams.get('param');
   }
 
   ngOnInit() {
+    const filePath = this.person?.imageData?.filePath || null
+    if (filePath) {
+      this.fileService.readFile(filePath).subscribe((file: any) => {
+        if (file) {
+          const blobUrl = URL.createObjectURL(file);
+          this.logoUrl = blobUrl;
+          this.loadingImage = false;
+        }
+      }, err => {
+        this.loadingImage = false;
+      })
+    } else {
+      this.loadingImage = false;
+    }
+
     this.getPerson()
   }
 
@@ -46,7 +65,6 @@ export class MedicInformationPage implements OnInit {
     const result = await this.personService.getPerson(this.person)
     result.subscribe(result => {
       let finalPerson = this.buildPersonMedicalRecord(result)
-      console.log('finalPerson:', finalPerson)
       this.person = finalPerson as any
       this.originalPerson = finalPerson as any
       this.chronicConditions = JSON.parse(JSON.stringify(finalPerson.medicalRecord.chronicConditions))

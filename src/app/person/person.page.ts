@@ -7,9 +7,11 @@ import { UpdatePersonPage } from './update-person/update-person.page';
 import { MedicInformationPage } from './medic-information/medic-information.page';
 import { Person } from '../_types/person.types';
 import { GenerateQrPage } from './generate-qr/generate-qr.page';
+import { UploadImagePage } from './upload-image/upload-image.page';
+import { FileService } from '../_services/file.service';
 
 
-type ComponentName = 'create' | 'update' | 'information' | 'qr'
+type ComponentName = 'create' | 'update' | 'information' | 'qr' | 'image'
 
 
 @Component({
@@ -25,15 +27,18 @@ export class PersonPage implements OnInit {
   originalPersons: Person[] = []
 
   loading = false
+  loadingImage = false
 
-  constructor(private personService: PersonService, private utilService: UtilService, private actionSheetController: ActionSheetController, private toastController: ToastController, private alertController: AlertController, private modalController: ModalController) { }
+  constructor(private personService: PersonService, private utilService: UtilService, private actionSheetController: ActionSheetController, private toastController: ToastController, private alertController: AlertController, private modalController: ModalController, private fileService: FileService) { }
 
   async ngOnInit() {
     this.loading = true;
     const list = await this.personService.listByUserId()
     list.subscribe((persons: Person[]) => {
       if (persons.length) {
-
+        for(let person of persons){
+          this.getImage(person)
+        }
         this.activePersons = persons.filter(person => person.status)
         this.desactivatedPersons = persons.filter(person => !person.status)
         this.listActivePersons()
@@ -76,12 +81,34 @@ export class PersonPage implements OnInit {
     });
   }
 
+  getImage(person: Person){    
+    person.loadingImage = true;
+    
+    const filePath = person?.imageData?.filePath || null
+    if (filePath) {
+      this.fileService.readFile(filePath).subscribe((file: any) => {
+        if (file) {
+          const blobUrl = URL.createObjectURL(file);
+          person.localImage = blobUrl;
+          person.loadingImage = false;
+        }
+      }, err => {
+        person.localImage = 'https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/user.png';
+        person.loadingImage = false;
+      })
+    } else {
+      person.localImage = 'https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/user.png';
+      person.loadingImage = false;
+    }
+  }
+
   async openModal(componentName: ComponentName, param?: any) {
     const components = {
       'create': CreatePersonPage,
       'update': UpdatePersonPage,
       'information': MedicInformationPage,
-      'qr': GenerateQrPage
+      'qr': GenerateQrPage,
+      'image': UploadImagePage
     }
 
     const modal = await this.modalController.create({
@@ -125,6 +152,13 @@ export class PersonPage implements OnInit {
           icon: 'id-card-outline',
           handler: () => {
             this.openModal('update', person)
+          }
+        },
+        {
+          text: 'Actualizar Imagen',
+          icon: 'image-outline',
+          handler: () => {
+            this.openModal('image', person)
           }
         },
         {

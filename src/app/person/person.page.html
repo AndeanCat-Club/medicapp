@@ -46,7 +46,8 @@
     <div style="margin-top:20px; border-bottom: 1px solid #EFF3FB; cursor: pointer;" *ngFor="let person of persons">
       <ion-item class="item-options" lines="none" (click)="options(person)">
         <ion-avatar>
-          <img src="https://avatars.githubusercontent.com/u/52795648?v=4">
+          <img [src]="person.localImage" *ngIf="!person.loadingImage">
+          <ion-spinner *ngIf="person.loadingImage"></ion-spinner>
         </ion-avatar>
         <ion-label style="margin-left: 20px;" *ngIf="person.firstName && person.lastName"><b>{{person.firstName}}
             {{person.lastName}}</b></ion-label>

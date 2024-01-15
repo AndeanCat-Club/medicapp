@@ -122,3 +122,26 @@ ion-item {
   margin-left: 15%;
   margin-bottom: 40px;
 }
+
+.andean-container{
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.andean-image-container{
+  width: 100%;
+}
+
+.andean-image{
+  width: 100px;
+  height: 100px; 
+  border-radius: 200px; 
+  margin-left: calc((100% - 100px) / 2);
+}
+
+.andean-note{
+  width: 100%;
+  text-align: center;
+  text-decoration: none; 
+}

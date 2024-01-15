@@ -30,10 +30,15 @@ const routes: Routes = [
     canActivate: []
   },
   {
+    path: 'donations',
+    loadChildren: () => import('./donations/donations.module').then( m => m.DonationsPageModule),
+    canActivate: []
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
-  },
+  }
 ];
 
 @NgModule({

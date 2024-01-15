@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'generate-qr',
     loadChildren: () => import('./generate-qr/generate-qr.module').then( m => m.GenerateQrPageModule)
+  },
+  {
+    path: 'upload-image',
+    loadChildren: () => import('./upload-image/upload-image.module').then( m => m.UploadImagePageModule)
   }
 ];
 

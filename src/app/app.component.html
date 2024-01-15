@@ -4,7 +4,7 @@
       <ion-content>
         <div *ngIf="menuInfo">
           <ion-list id="inbox-list">
-            <ion-list-header>Medicapp</ion-list-header>
+            <ion-list-header>NIMA</ion-list-header>
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
                 routerLinkActive="selected">
@@ -22,7 +22,7 @@
 
         <div *ngIf="!menuInfo">
           <ion-list id="inbox-list">
-            <ion-list-header>Medicapp</ion-list-header>
+            <ion-list-header>NIMA</ion-list-header>
             <ion-menu-toggle auto-hide="false" *ngFor="let p of notLoggedPages; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
                 routerLinkActive="selected">
@@ -42,6 +42,7 @@
           <a class="andean-note" href="https://www.andeancat.club" target="_blank"><p
               style="background-color: #4573ea; color: white; cursor: pointer; vertical-align: bottom;">Hecho con cariño ♥ por
               <br><b>andeancat.club</b></p></a>
+            <p style="color: white; text-align: center;">v1.0.0</p>
         </div>
       </ion-content>
 

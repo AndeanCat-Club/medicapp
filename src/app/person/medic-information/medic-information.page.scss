@@ -8,6 +8,12 @@ ion-toolbar{
   width: 0% !important;
 }
 
+.person-spinner-container{
+  width: 35%;
+  margin-left: 32.5%;
+  margin-top: 20px;
+}
+
 .person-circle-container{
     width: 35%;
     margin-left: 32.5%;
@@ -16,9 +22,12 @@ ion-toolbar{
 
 .person-circle{
     width: 80%;
-    margin-left: 10%;
+    margin-left: calc((100% - 150px) / 2);
     border-radius: 200px;
-}
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }
 
 .person-name{
     text-align: center;

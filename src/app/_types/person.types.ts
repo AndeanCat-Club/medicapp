@@ -11,6 +11,13 @@ export interface Person {
     medicalRecord: MedicalRecord
     userId: String
     publicCode?: String 
+    imageData: ImageData
+    loadingImage?: boolean 
+    localImage?: String 
+  }
+
+  interface ImageData{
+    filePath: String
   }
 
   interface MedicalRecord {

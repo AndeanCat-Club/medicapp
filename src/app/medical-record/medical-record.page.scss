@@ -19,9 +19,12 @@ ion-content {
 }
 
 .person-circle{
-  width: 30%;
-  margin-left: 35%;
+  width: 80%;
+  margin-left: calc((100% - 150px) / 2);
   border-radius: 200px;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
 
 .person-name{

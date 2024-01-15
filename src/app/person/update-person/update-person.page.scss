@@ -1,26 +1,26 @@
-ion-toolbar{
-    --background: #4573ea !important;
-    text-align: center;
-    color: white;
-  }
-  
-.header-md::after{
+ion-toolbar {
+  --background: #4573ea !important;
+  text-align: center;
+  color: white;
+}
+
+.header-md::after {
   width: 0% !important;
 }
 
-.individual-input-container{
+.individual-input-container {
   width: 90%;
   margin-left: 5%;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-.date-title{
+.date-title {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.date-container{
+.date-container {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 10px;
@@ -29,7 +29,7 @@ ion-toolbar{
   display: flex;
 }
 
-.confirm-button{
+.confirm-button {
   /* text-transform: uppercase; */
   outline: 0;
   width: 90%;
@@ -48,12 +48,14 @@ ion-toolbar{
   border-radius: 3px;
 }
 
-.confirm-button:disabled{
+.confirm-button:disabled {
   background-color: #94a1cb;
 }
 
 
 #fecha {
-  width: 100%; /* El input ocupa todo el ancho del contenedor */
-  border: none; /* Quita el borde del input */
+  width: 100%;
+  /* El input ocupa todo el ancho del contenedor */
+  border: none;
+  /* Quita el borde del input */
 }

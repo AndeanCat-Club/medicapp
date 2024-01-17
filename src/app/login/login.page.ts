@@ -31,6 +31,7 @@ export class LoginPage implements OnInit {
       this.toastSuccess()
       this.sessionService.setSession(result)
       this.eventService.emitEventValue('isLoggedChanges',true)
+      this.loginForm.reset();
       this.routeTo('person') 
     }, err => {
       this.toastError()

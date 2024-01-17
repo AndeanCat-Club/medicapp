@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../_services/register.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { User } from '../_types/user.types';
 import { AuthService } from '../_services/auth.service';
 import { SessionService } from '../_services/session.service';
 import { ValidationService } from '../_services/validation.service';
+import { EventService } from '../_services/event.service';
+import { PrivacyPage } from '../privacy/privacy.page';
+import { TermsPage } from '../terms/terms.page';
+
+type ComponentName = 'privacy' | 'terms'
 
 @Component({
   selector: 'app-register',
@@ -16,12 +21,13 @@ import { ValidationService } from '../_services/validation.service';
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private formBuilder:FormBuilder, private router: Router, private validationService: ValidationService, private registerService: RegisterService, private toastController: ToastController,  private authService: AuthService, private sessionService: SessionService) { 
+  constructor(private formBuilder:FormBuilder, private eventService: EventService, private router: Router, private validationService: ValidationService, private registerService: RegisterService, private toastController: ToastController, private modalController: ModalController, private authService: AuthService, private sessionService: SessionService) { 
     this.registerForm = this.formBuilder.group({
       name : ['',[Validators.required]],
       phone : ['',[Validators.required]],
       email : ['',[Validators.required, this.validationService.emailValidator]],
-      password : ['',Validators.required]
+      password : ['',Validators.required],
+      aceptTerms: [false, Validators.required]
     }); 
   }
 
@@ -33,7 +39,11 @@ export class RegisterPage implements OnInit {
   }
 
   async saveUser(){
+    const form = this.registerForm.value;
+    delete form.aceptTerms
+    console.log('forms:', form);
     const user: User = this.registerForm.value
+
     this.registerService.insert(user).subscribe(value => {
       console.log('guardado')
       this.login(user);
@@ -70,9 +80,31 @@ export class RegisterPage implements OnInit {
       console.log('result:', result);
       this.toastSuccess()
       this.sessionService.setSession(result)
+      this.eventService.emitEventValue('isLoggedChanges',true)
       this.routeTo('person') 
     }, err => {
       alert('Correo no existe o contraseña incorrecta')
     })
+  }
+
+  async openModal(componentName: ComponentName, param?: any) {
+    const components = {
+      'privacy': PrivacyPage,
+      'terms': TermsPage,
+    }
+
+    const modal = await this.modalController.create({
+      component: components[componentName],
+      cssClass: 'modals',
+      componentProps: {
+        param
+      }
+    });
+
+    modal.onDidDismiss().then(modal => {
+      this.ngOnInit();
+    });
+
+    return await modal.present();
   }
 }

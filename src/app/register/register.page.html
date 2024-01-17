@@ -14,7 +14,6 @@
     </div>
     <div class="right-container">
       <form [formGroup]="registerForm">
-
         <div class="register-form-container">
           <h1 class="title-role">Regístrate en NIMA</h1>
           <div class="">
@@ -35,8 +34,18 @@
                 formControlName="password" name="password" required></ion-input>
             </div>
 
+            <div class="individual-container">
+              <div class="checks-container">
+                <ion-item>
+                  <ion-checkbox checked="false" formControlName="aceptTerms" slot="start"></ion-checkbox>
+                  Autorizar declaración de privacidad y términos y condiciones
+                </ion-item>
+                <p>Autorizo el uso de mis datos de acuerdo a la <span style="color: #4573ea; cursor: pointer;" (click)="openModal('privacy')">Declaración de Privacidad</span> y acepto los <span style="color: #4573ea; cursor: pointer;" (click)="openModal('terms')">Términos y Condiciones.</span></p>
+              </div>
+            </div>
+
             <div class="register-button-container">
-              <button class="register-button" (click)="saveUser()" [disabled]="!registerForm.valid">Regístrate</button>
+              <button class="register-button" (click)="saveUser()" [disabled]="!registerForm.valid || !registerForm.controls['aceptTerms'].value">Regístrate</button>
             </div>
           </div>
         </div>

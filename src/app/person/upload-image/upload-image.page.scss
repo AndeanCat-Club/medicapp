@@ -24,6 +24,15 @@ ion-toolbar {
     object-fit: contain;
 }
 
+.buttons-container{
+    display: flex;
+    margin-left: 20px;
+}
+
+.file-container{
+    margin-top: 13.5px;
+}
+
 .file-button {
     padding-bottom: 10px;
     padding-left: 10px;
@@ -54,4 +63,32 @@ ion-toolbar {
 
 .option-button{
     margin-left: 5px;
+}
+
+@media (max-width: 900px){
+    .buttons-container{
+        display: block;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .file-container{
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .file-button {
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 10px;
+        padding-top: 10px;
+        margin-bottom: 10px;
+        background: #5c3af1;
+        color: white;
+        border-radius: 5px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+    }
 }

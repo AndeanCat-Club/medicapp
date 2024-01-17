@@ -9,8 +9,7 @@ import { Person } from '../_types/person.types';
 import { GenerateQrPage } from './generate-qr/generate-qr.page';
 import { UploadImagePage } from './upload-image/upload-image.page';
 import { FileService } from '../_services/file.service';
-
-
+import { Observable } from 'rxjs';
 type ComponentName = 'create' | 'update' | 'information' | 'qr' | 'image'
 
 
@@ -28,7 +27,8 @@ export class PersonPage implements OnInit {
 
   loading = false
   loadingImage = false
-
+  imageUrl = Observable<string>;
+  
   constructor(private personService: PersonService, private utilService: UtilService, private actionSheetController: ActionSheetController, private toastController: ToastController, private alertController: AlertController, private modalController: ModalController, private fileService: FileService) { }
 
   async ngOnInit() {

@@ -49,6 +49,7 @@
           <img [src]="person.localImage" *ngIf="!person.loadingImage">
           <ion-spinner *ngIf="person.loadingImage"></ion-spinner>
         </ion-avatar>
+
         <ion-label style="margin-left: 20px;" *ngIf="person.firstName && person.lastName"><b>{{person.firstName}}
             {{person.lastName}}</b></ion-label>
         <ion-buttons slot="end">
@@ -57,6 +58,7 @@
           </ion-button>
         </ion-buttons>
       </ion-item>
+
       <div style=" padding-bottom: 10px;" (click)="options(person)">
         <ion-chip style="margin-left: 15px;" *ngIf="person.rut">
           <ion-icon name="id-card-outline"></ion-icon>

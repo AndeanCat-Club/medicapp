@@ -1,12 +1,116 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Lista de mascotas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" *ngIf="!loading">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="routeTo('pet/add-pet')" color="light">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <div class="title-container">
+      <h1 class="title">Encuentra tus máscotas y actualiza sus códigos QR</h1>
+      <div style="width:100%; display: flex;">
+      <ion-toolbar class="ion-toolbar">
+        <ion-searchbar class="custom" placeholder="Buscar" (ionInput)="searchPet($event)"></ion-searchbar>
+      </ion-toolbar>
 
-<ion-content [fullscreen]="true">
+      <button class="button-create desktop" (click)="routeTo('pet/add-pet')">
+        Agregar mascota
+      </button>
+    </div>
+    </div>
+ 
 
+  <div class="">
+    <ion-segment value="default">
+      <ion-segment-button value="default" (click)="listActivePets()">
+        <ion-label>Activas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="segment" (click)="listDesactivatedPets()">
+        <ion-label>Archivadas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <h1 class="title-list">Lista de mascotas</h1>
+
+    <div class="card-list" (click)="options(pet)"
+      style="margin-top:20px; padding-top: 10px; border-bottom: 1px solid #EFF3FB; cursor: pointer;"
+      *ngFor="let pet of pets">
+      <ion-item class="item-options" lines="none">
+        <ion-avatar>
+          <img src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/pet.png">
+        </ion-avatar>
+        <ion-label style="margin-left: 20px;" *ngIf="pet.name"><b>{{pet.name}}</b></ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+
+      <div style=" padding-bottom: 10px;">
+        <ion-chip style="margin-left: 15px;" *ngIf="pet.age">
+          <ion-icon name="egg-outline"></ion-icon>
+          <ion-label><b>Edad:</b> {{pet.age}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="pet.species">
+          <ion-icon name="paw-outline"></ion-icon>
+          <ion-label><b>Especie:</b> {{pet.owner.species}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px; background: #ec82e0;" *ngIf="pet.owner">
+          <ion-icon name="id-card-outline"></ion-icon>
+          <ion-label><b>Dueño/a:</b> {{pet.owner.name}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px; background: #ecb082;" *ngIf="pet.owner">
+          <ion-icon name="call-outline"></ion-icon>
+          <ion-label><b>Celular de Emergencia:</b> {{pet.owner.emergencyContact}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="pet.owner">
+          <ion-icon name="location-outline"></ion-icon>
+          <ion-label><b>Dirección:</b> {{pet.owner.adress}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px;" *ngIf="pet.owner">
+          <ion-icon name="globe-outline"></ion-icon>
+          <ion-label><b>Red Social del dueño:</b> {{pet.owner.social}}</ion-label>
+        </ion-chip>
+        <ion-chip style="margin-left: 15px; background: #82afec; color: white;" *ngIf="pet.description">
+          <ion-icon name="globe-outline"></ion-icon>
+          <ion-label><b>Descripción extra: {{pet.description}}</b></ion-label>
+        </ion-chip>
+      </div>
+    </div>
+    <div style="cursor: pointer;" (click)="routeTo('pet/add-pet')" *ngIf="pets.length === 0 && firstCheck">
+      <div class="image-container">
+        <img class="image" src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/loading.png">
+      </div>
+      <p style="text-align: center;"><b>Aún no has agregado una máscota ir a agregar</b></p>
+    </div>
+
+    <div class="card-list" *ngIf="pets.length === 0 && !firstCheck">
+      <ion-item>
+        <p>Criterio de busqueda sin mascotas encontradas...</p>
+      </ion-item>
+    </div>
+  </div>
+
+  <div style="min-height: 50px;"></div>
+
+  <ion-fab class="cellphone" slot="fixed" vertical="bottom" horizontal="end" *ngIf="!loading">
+    <ion-fab-button (click)="routeTo('pet/add-pet')">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <div class="creation-loading">
+    <div class="loading-image-container">
+      <img class="loading-image" src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/loading.png">
+    </div>
+
+    <div class="title-container">
+      <h1 class="title loading-text">Listando Mascotas</h1>
+    </div>
+  </div>
 </ion-content>

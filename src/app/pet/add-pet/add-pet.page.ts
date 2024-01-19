@@ -106,6 +106,6 @@ export class AddPetPage implements OnInit {
   }
 
   routeTo(route: string) {
-    this.router.navigate([`/${route}`])
+    this.router.navigate([`/${route}`], {replaceUrl: true})
   }
 }

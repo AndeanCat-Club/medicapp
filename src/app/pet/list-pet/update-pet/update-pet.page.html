@@ -1,13 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>update-pet</ion-title>
+    <ion-title>Editar Mascota</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">update-pet</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" slot="md">
+  <p style="margin-left: 10px;">
+    Datos de la Mascota
+  </p>
+
+  <form [formGroup]="petForm">
+    <div class="individual-input-container">
+      <ion-input slot="md" label="Nombre" label-placement="floating" fill="outline" formControlName="name" name="name" required></ion-input>          
+    </div>
+    
+    <div class="individual-input-container">
+      <ion-input label="Species" label-placement="floating" fill="outline" formControlName="species" name="species" required></ion-input>
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Edad (Opcional)" label-placement="floating" fill="outline" formControlName="age" name="age"></ion-input>          
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Descripción (* Opcional)" label-placement="floating" fill="outline" formControlName="description" name="description"></ion-input>
+    </div>
+  </form>
+
+  <p style="margin-left: 5px;">
+    Datos de Emergencia
+  </p>
+
+  <form [formGroup]="ownerForm">
+    <div class="individual-input-container">
+      <ion-input slot="md" label="Nombre dueño/a" label-placement="floating" fill="outline" formControlName="name" name="name" required></ion-input>          
+    </div>
+    
+    <div class="individual-input-container">
+      <ion-input label="Número de emergencia" label-placement="floating" fill="outline" formControlName="emergencyContact" name="emergencyContact" required></ion-input>
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Red Social (*Opcional) Ej: Instagram @dueño1" label-placement="floating" fill="outline" formControlName="social" name="social"></ion-input>          
+    </div>
+
+    <div class="individual-input-container">
+      <ion-input label="Direccióm (* Opcional)" label-placement="floating" fill="outline" formControlName="address" name="address"></ion-input>
+    </div>
+  </form>
+
+  <div class="button-container">
+    <button *ngIf="!loadingButton" class="confirm-button" (click)="confirmUpdate()" size="medium" [disabled]="!petForm.valid || !ownerForm.valid">Actualizar mascota</button>
+    <button *ngIf="loadingButton" class="confirm-button" size="medium"><ion-spinner color="light"></ion-spinner></button>
+  </div>
 </ion-content>

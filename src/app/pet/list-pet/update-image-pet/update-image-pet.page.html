@@ -1,13 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>update-image-pet</ion-title>
+    <ion-title>Actualizar Imagen</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">update-image-pet</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <div class="pet-circle-container" *ngIf="!logoUrl">
+    <img class="pet-circle" src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/pet.png">
+  </div>
+
+  <div class="pet-circle-container" *ngIf="logoUrl">
+    <img class="pet-circle" [src]="logoUrl">
+  </div>
+
+  <div style="margin-left: 20px;">
+    <p>Formatos Permitidos (<b>png</b>, <b>jpg</b>) </p>
+    <p>Tamaño Recomendado (<b>150px</b> x <b>150px</b>) </p>
+  </div>
+
+  <div class="buttons-container">
+    <div class="file-container">
+      <label class="file-button" for="file-input">Cambiar Imágen</label>
+      <input style="display: none;" type="file" id="file-input" name="file-input" (change)="readSingleFile($event)" />
+    </div>
+
+    <div style="margin-top: 0px;">
+      <ion-button class="option-button" (click)="cancelUpdate()" [disabled]="!form">Cancelar</ion-button>
+    </div>
+
+    <div style="margin-top: 0px;">
+      <ion-button class="option-button" (click)="confirmUpdate()" [disabled]="!form">Actualizar</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="loading">
+  <div class="loading"></div>
 </ion-content>

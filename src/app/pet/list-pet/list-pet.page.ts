@@ -24,10 +24,11 @@ export class ListPetPage implements OnInit {
   constructor(private petService: PetService, private router: Router, private modalController: ModalController, private alertController: AlertController, private toastController: ToastController, private actionSheetController: ActionSheetController) { }
 
   async ngOnInit() {
+    console.log(':hola')
     this.loading = true;
     const list = await this.petService.listByUserId()
     list.subscribe((pets: any[]) => {
-      console.log(pets)
+      console.log(':hola', pets)
       if (pets.length) {
         this.firstCheck = false;
         this.activePets = pets.filter(pet => pet.status)
@@ -69,7 +70,7 @@ export class ListPetPage implements OnInit {
   }
 
   routeTo(route: string) {
-    this.router.navigate([`/${route}`])
+    this.router.navigate([`/${route}`], {replaceUrl: true})
   }
 
   async openModal(componentName: ComponentName, param?: any) {
@@ -211,20 +212,20 @@ export class ListPetPage implements OnInit {
   updatePetStatus(pet: any) {
     this.petService.changeStatus(pet).subscribe(result => {
       this.toastSuccess();
-      this.ngOnInit();
+      this.clearPage()
     }, () => {
       this.toastError();
-      this.ngOnInit();
+      this.clearPage()
     })
   }
   
   deletePet(pet: any) {
     this.petService.deletePet(pet).subscribe(result => {
       this.toastDeleteSuccess();
-      this.ngOnInit();
+      this.clearPage();
     }, () => {
       this.toastDeleteError();
-      this.ngOnInit();
+      this.clearPage();
     })
   }
 
@@ -258,6 +259,16 @@ export class ListPetPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  clearPage() {
+    this.loading = false;
+    this.pets = [];
+    this.activePets = []
+    this.desactivatedPets = []
+    this.originalPets = []
+    this.firstCheck = false;
+    this.ngOnInit();
   }
 
 }

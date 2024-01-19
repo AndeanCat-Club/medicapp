@@ -50,3 +50,15 @@
       -webkit-transform: rotate(360deg);
     }
   }
+
+  @keyframes shakeError {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25%, 75% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }

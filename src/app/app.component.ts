@@ -3,6 +3,9 @@ import { SessionService } from './_services/session.service';
 import { StorageService } from './_services/storage.service';
 import { Router } from '@angular/router';
 import { EventService } from './_services/event.service';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-root',
@@ -12,7 +15,7 @@ import { EventService } from './_services/event.service';
 export class AppComponent {
   public appPages = [
     { title: 'Personas', url: '/person', icon: 'person' },
-    { title: 'Mascotas... proximamente', url: '/pet', icon: 'paw' },
+    { title: 'Mascotas', url: '/pet', icon: 'paw' },
     { title: 'Donaciones', url: '/donations', icon: 'gift' }
   ];
 

@@ -35,17 +35,26 @@ const routes: Routes = [
     canActivate: []
   },
   {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
     path: 'privacy',
     loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
   {
     path: 'terms',
     loadChildren: () => import('./terms/terms.module').then( m => m.TermsPageModule)
+  },
+  {
+    path: 'pet',
+    loadChildren: () => import('./pet/pet.module').then( m => m.PetPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pet-record',
+    loadChildren: () => import('./pet-record/pet-record.module').then( m => m.PetRecordPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   }
 ];
 

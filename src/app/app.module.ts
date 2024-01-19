@@ -15,18 +15,19 @@ import { AuthService } from './_services/auth.service';
 import { StorageService } from './_services/storage.service';
 import { SessionService } from './_services/session.service';
 import { QrService } from './_services/qr.service';
-
-import { IonicStorageModule } from '@ionic/storage-angular';
 import { ValidationService } from './_services/validation.service';
 import { EventService } from './_services/event.service';
 import { FileService } from './_services/file.service';
+import { PetService } from './_services/pet.service';
+
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     mode: 'md'
   }), HttpClientModule, AppRoutingModule, IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService, AuthService, SessionService, StorageService, QrService, ValidationService, EventService, FileService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService, AuthService, SessionService, StorageService, QrService, ValidationService, EventService, FileService, PetService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

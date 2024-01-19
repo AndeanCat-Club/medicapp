@@ -1,0 +1,153 @@
+ion-content {
+  --background: #d1ddf6;
+}
+
+ion-toolbar {
+  --background: #864AF9 !important;
+  text-align: center;
+  color: white;
+}
+
+.header-md::after {
+  width: 0% !important;
+}
+
+.title-container {
+  background: #864AF9 !important;
+  width: 100%;
+  margin-left: 0%;
+  padding-top: 10px;
+  text-align: center;
+  color: white;
+  padding-bottom: 35px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.title{
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.ion-toolbar {
+  width: 80%;
+  margin-left: 2.5%;
+  margin-left: 2.5%;
+  --background: transparent !important;
+  color: #0e1538;
+  text-align: center;
+}
+
+ion-searchbar.custom {
+  --background: white;
+  --color: #000000;
+  --placeholder-color: #000000;
+  --icon-color: #000000;
+  --clear-button-color: #000000;
+  --box-shadow: none;
+  --border-radius: 4px;
+}
+
+.button-create{
+  font-family: "Roboto", sans-serif;
+  /* text-transform: uppercase; */
+  outline: 0;
+  width: 15%;
+  margin-left: 20px;
+  border: 0;
+  padding-top: 12.5px;
+  padding-bottom: 12.5px;
+  background-color: #ffffff;
+  color: #864AF9;
+  font-size: 17px;
+  font-weight: 700;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.title-list{
+  margin-left: 30px;
+}
+
+.custom-item{
+  display: flex;
+}
+
+.image-container{
+  width: 50%;
+  margin-left: 25%;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.image{
+  width: 200px;
+  margin-left: calc((100% - 200px) / 2);
+  object-fit: contain;
+  border-radius: 200px;
+}
+
+.card-list{
+  background: white;
+  width: 95%;
+  margin-left: 2.5%;
+  border-radius: 10px;
+  transition: .5s;
+}
+
+.card-list:hover{
+  transition: .5s;
+  transform: scale(1.01);
+}
+
+.creation-loading{
+  width: 100%;
+  min-height: 100vh;
+  background: #864AF9 !important;
+}
+
+
+.loading-image-container{
+  width: 50%;
+  margin-left: 25%;
+  padding-top: 150px;
+  padding-bottom: 0px;
+}
+
+.loading-image{
+  width: 200px;
+  margin-left: calc((100% - 200px) / 2);
+  object-fit: contain;
+  border-radius: 200px;
+  animation: spin 2s ease infinite;
+}
+
+.loading-text{
+  animation: moveText 1s ease infinite;
+}
+
+.cellphone{
+  display: none;
+}
+
+@media (max-width: 900px){
+  .desktop{
+      display: none;
+  }
+
+  .cellphone{
+      display: block;
+  }
+
+  .ion-toolbar {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-left: 2.5%;
+    --background: transparent !important;
+    color: #0e1538;
+    text-align: center;
+  }
+}

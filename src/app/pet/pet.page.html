@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-icon name="paw"></ion-icon>
+    <ion-title>Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <div class="container-titles">
+      <h1 class="pet-title">Bienvenido a la sección de Mascotas</h1>
+      <h2 class="pet-subtitle">¿Qué deseas hacer?</h2>
+    </div>
+
+    <div class="card-container" >
+      <div class="card" (click)="routeTo('pet/list-pet')">
+        <h1 class="card-title">Ver tu lista de mascotas</h1>
+        <div class="card-image-container" >
+          <img class="card-image" src="https://media.discordapp.net/attachments/1093087836149919764/1197814768858316810/quire_Andean_mountain_cat_planet_logo_64e672d2-20a7-4e9d-aa15-7b8467372069.png?ex=65bca2ef&is=65aa2def&hm=e8570c74752524d82d9c0ad9df89dbae745d9ffc15afb4bc383c8b2fb5b79143&=&format=webp&quality=lossless&width=1170&height=1170">
+        </div>
+      </div>
+      <div class="card" (click)="routeTo('pet/add-pet')">
+        <h1 class="card-title">Agregar una mascota nueva</h1>
+        <div class="card-image-container">
+          <img class="card-image" src="https://media.discordapp.net/attachments/1093087836149919764/1197815548369715311/quire_dog_mountain_planet_logo_9ab6dbfb-a754-47b9-bbd0-ec419ff4eefb.png?ex=65bca3a9&is=65aa2ea9&hm=1d2c62dd65f8a22ae5a093c76c9e6f501fb2d2a0ccec2dcd723e3f8ad62849e3&=&format=webp&quality=lossless&width=1170&height=1170">
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

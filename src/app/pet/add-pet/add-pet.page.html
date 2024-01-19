@@ -1,0 +1,161 @@
+<ion-content [fullscreen]="true" *ngIf="!loadingCreation">
+  <div>
+    <swiper-container id="fathersito" class="father">
+      <swiper-slide [ngClass]="{'animation-error': animationError}">
+        <div class="slide-first">
+          <ion-toolbar class="toolbar-first">
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="routeTo('pet')" color="light">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          
+          <div class="image-container">
+            <img class="image"
+              src="https://media.discordapp.net/attachments/1093087836149919764/1197814768858316810/quire_Andean_mountain_cat_planet_logo_64e672d2-20a7-4e9d-aa15-7b8467372069.png?ex=65bca2ef&is=65aa2def&hm=e8570c74752524d82d9c0ad9df89dbae745d9ffc15afb4bc383c8b2fb5b79143&=&format=webp&quality=lossless&width=1170&height=1170">
+          </div>
+  
+          <div class="title-container">
+            <h1 class="title">Para a comenzar, escribe el nombre de tu mascota, la especie y una edad aproximada <br>(la
+              edad es opcional)</h1>
+          </div>
+  
+          <div class="text-container">
+            <div class="form-container">
+              <form [formGroup]="petForm">
+                <div class="input-pet-container">
+                  <p><b>Nombre de la mascota</b></p>
+                  <ion-input slot="md" label="Nombre" formControlName="name" name="name" type="text" label-placement="floating" fill="outline"
+                    required></ion-input>
+                </div>
+                <div class="input-pet-container">
+                  <p><b>Especie (Ej: Gato, Perro, Tortuga... etc)</b></p>
+                  <ion-input slot="md" label="Especie" formControlName="species" name="species" type="text" label-placement="floating" fill="outline"
+                    required></ion-input>
+                </div>
+                <div class="input-pet-container">
+                  <p><b>Edad (Opcional)</b></p>
+                  <ion-input slot="md" label="Edad" formControlName="age" name="age" type="text" label-placement="floating" fill="outline"></ion-input>
+                </div>
+              </form>
+              <div class="button-container">
+                <button class="next-button" style="background-color: #864AF9;" (click)="nextSlider()">Siguiente</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slide-second">
+          <ion-toolbar class="toolbar-second">
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="routeTo('pet')" color="light">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+  
+          <div class="image-container">
+            <img class="image"
+              src="https://media.discordapp.net/attachments/1093087836149919764/1197815548369715311/quire_dog_mountain_planet_logo_9ab6dbfb-a754-47b9-bbd0-ec419ff4eefb.png?ex=65bca3a9&is=65aa2ea9&hm=1d2c62dd65f8a22ae5a093c76c9e6f501fb2d2a0ccec2dcd723e3f8ad62849e3&=&format=webp&quality=lossless&width=1170&height=1170">
+          </div>
+  
+          <div class="title-container">
+            <h1 class="title">Ahora agregaremos los datos del dueño en caso de que tu mascota se pierda <br>(la dirección
+              y la red social son opcionales)</h1>
+          </div>
+  
+          <div class="text-container">
+            <div class="form-container">
+              <form [formGroup]="ownerForm">
+                <div class="input-pet-container">
+                  <p><b>Nombre del dueño</b></p>
+                  <ion-input slot="md" label="Nombre" type="text" label-placement="floating" fill="outline" formControlName="name" name="name" required></ion-input>
+                </div>
+                <div class="input-pet-container">
+                  <p><b>Celular de Emergencia</b></p>
+                  <ion-input slot="md" label="Celular" type="text" label-placement="floating" fill="outline" formControlName="emergencyContact" name="emergencyContact"
+                    required></ion-input>
+                </div>
+                <div class="input-pet-container">
+                  <p><b>Dirección (Opcional)</b></p>
+                  <ion-input slot="md" label="Dirección" type="text" label-placement="floating" fill="outline" formControlName="address" name="address"></ion-input>
+                </div>
+                <div class="input-pet-container">
+                  <p><b>Red Social (Opcional)</b></p>
+                  <ion-input slot="md" label="Ej: (Instagram @dueño1 o TikTok @dueño1)" type="text" label-placement="floating" fill="outline" formControlName="social" name="social"></ion-input>
+                </div>
+              </form>
+              <div class="button-container">
+                <button class="next-button" style="background-color: #f78a31;" (click)="nextSlider()">Siguiente</button>
+              </div>
+              <div class="button-container">
+                <button class="next-button" style="background-color: #864AF9;" (click)="previuosSlider()">Volver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+      <swiper-slide>
+        <div class="slide-third">
+          <ion-toolbar class="toolbar-third">
+            <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+              <ion-button (click)="routeTo('pet')" color="light">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+  
+          <div class="image-container">
+            <img class="image"
+              src="https://media.discordapp.net/attachments/1093087836149919764/1197863877212377218/quire_Rabbit_mountain_planet_logo_551d97be-a97c-4073-84c0-e9bc6118a628.png?ex=65bcd0ab&is=65aa5bab&hm=d36416cb0a17be198810e07715d756772b1c68e3f642f91958a1fd89a409e632&=&format=webp&quality=lossless&width=1170&height=1170">
+          </div>
+  
+          <div class="title-container">
+            <h1 class="title">¿Deseas añadir una descripción ? (Es opcional) <br><br> Ej: Mi perro tienda a morder cuando se asusta, porfavor no acercarse tan rápido</h1>
+          </div>
+  
+          <div class="text-container">
+            <div class="form-container">
+              <form [formGroup]="descriptionForm">
+                <div class="textarea-container">
+                  <p><b>Descripción</b></p>
+                  <ion-textarea slot="md" label="Descripción" type="text" label-placement="floating" fill="outline" formControlName="description" name="description"></ion-textarea>
+                </div>
+              </form>
+              <div class="button-container">
+                <button class="next-button" style="background-color: #3e972e;" (click)="createPet()">Crear y continuar</button>
+              </div>
+              <div class="button-container">
+                <button class="next-button" style="background-color: #f78a31;" (click)="previuosSlider()">Volver</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loadingCreation">
+  <div class="creation-loading">
+    <div class="loading-image-container">
+      <img class="loading-image"
+        src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/loading.png">
+    </div>
+
+    <div class="title-container">
+      <h1 class="title loading-text">Creando Mascota</h1>
+    </div>
+  </div>
+</ion-content>

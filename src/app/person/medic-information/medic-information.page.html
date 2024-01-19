@@ -43,15 +43,15 @@
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
         <ion-icon name="egg-outline"></ion-icon>
-        <p><b>Fecha de Nacimiento</b>: {{calculateDate(person.birthDate)}}</p>
+        <ion-label><b>Fecha de Nacimiento</b>: {{calculateDate(person.birthDate)}}</ion-label>
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person.birthDate">
         <ion-icon name="egg-outline"></ion-icon>
-        <p><b>Edad</b>: {{calculateAge(person.birthDate)}}</p>
+        <ion-label><b>Edad</b>: {{calculateAge(person.birthDate)}}</ion-label>
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person.emergencyContact">
         <ion-icon name="call-outline"></ion-icon>
-        <p><b>Número de emergencia</b>: {{person.emergencyContact}}</p>
+        <ion-label><b>Número de emergencia</b>: {{person.emergencyContact}}</ion-label>
       </ion-chip>
     </div>
 
@@ -120,7 +120,7 @@
       <div *ngIf="person.medicalRecord.allergies.length > 0">
         <ion-chip style="margin-left: 15px;" *ngFor="let allergie of allergies">
           <ion-icon name="thermometer-outline"></ion-icon>
-          <p>{{allergie}}</p>
+          <ion-label>{{allergie}}</ion-label>
         </ion-chip>
       </div>
 
@@ -191,7 +191,7 @@
       <div *ngIf="person.medicalRecord.chronicConditions.length > 0">
         <ion-chip style="margin-left: 15px;" *ngFor="let chronicCondition of chronicConditions">
           <ion-icon name="bandage-outline"></ion-icon>
-          <p>{{chronicCondition}}</p>
+          <ion-label>{{chronicCondition}}</ion-label>
         </ion-chip>
       </div>
 
@@ -263,7 +263,7 @@
       <div *ngIf="person.medicalRecord.medications.length > 0">
         <div>
           <ion-chip style="margin-left: 15px;" *ngFor="let medication of medications">
-            <p>{{medication.name}}</p>
+            <ion-label>{{medication.name}}</ion-label>
           </ion-chip>
         </div>
 
@@ -291,10 +291,10 @@
       <div style="width:90%; margin-left: 5%; display: flex;" *ngIf="onEditionIndex != i">
         <div style="width: 80%;">
           <p><b>Nombre:</b> {{medication.name}}</p>
-          <ion-chip><p><b>Dosis:</b> {{medication.dosage}}</p></ion-chip>
-          <ion-chip><p><b>Recetado por:</b> {{medication.prescribedBy}}</p></ion-chip>
-          <ion-chip><p><b>Fecha de inicio:</b> {{medication.prescribedBy}}</p></ion-chip>
-          <ion-chip><p><b>Fecha de final:</b> {{medication.prescribedBy}}</p></ion-chip>
+          <ion-chip><ion-label><b>Dosis:</b> {{medication.dosage}}</ion-label></ion-chip>
+          <ion-chip><ion-label><b>Recetado por:</b> {{medication.prescribedBy}}</ion-label></ion-chip>
+          <ion-chip><ion-label><b>Fecha de inicio:</b> {{medication.prescribedBy}}</ion-label></ion-chip>
+          <ion-chip><ion-label><b>Fecha de final:</b> {{medication.prescribedBy}}</ion-label></ion-chip>
         </div>
         <div style="width: 20%; margin-top: 5px;">
           <ion-buttons slot="end">

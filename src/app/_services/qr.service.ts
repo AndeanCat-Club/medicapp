@@ -9,7 +9,8 @@ import { environment } from 'src/environments/environment';
 export class QrService {
   private baseUrl: string = environment.host || 'http://localhost:3000';
   private ownDomain: string = `${window.location.origin}/medical-record` || 'http://localhost:8100/medical-record';
-  
+  private ownPetDomain : string = `${window.location.origin}/pet-record` || 'http://localhost:8100/pet-record';
+
   constructor(private http: HttpClient) { }
 
   generateQRCode(data: String | undefined): Observable<any> {
@@ -17,6 +18,20 @@ export class QrService {
 
     const body = { data: finalData };
     const url = `${this.baseUrl}/person/generateQRCode/`;
+
+    const options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.post(url, body, options);
+  }
+
+  generateQrCodePet(data: String | undefined): Observable<any> {
+    const finalData = `${this.ownPetDomain}?code=${data}`
+
+    const body = { data: finalData };
+    const url = `${this.baseUrl}/pet/generateQRCode/`;
 
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

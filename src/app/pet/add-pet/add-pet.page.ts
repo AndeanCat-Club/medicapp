@@ -73,10 +73,12 @@ export class AddPetPage implements OnInit {
         this.loadingCreation = false
         this.toastSuccess();
         this.routeTo('pet/list-pet')
+        this.cleanPet();
       }, () => {
         this.loadingCreation = false;
         this.toastError();
-        this.routeTo('pet')
+        this.routeTo('pet');
+        this.cleanPet();
       })
     }
   }
@@ -107,5 +109,11 @@ export class AddPetPage implements OnInit {
 
   routeTo(route: string) {
     this.router.navigate([`/${route}`], {replaceUrl: true})
+  }
+
+  cleanPet(){
+    this.petForm.reset()
+    this.ownerForm.reset()
+    this.descriptionForm.reset()
   }
 }

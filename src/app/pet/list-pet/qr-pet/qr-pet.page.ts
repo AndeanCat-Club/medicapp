@@ -36,7 +36,7 @@ export class QrPetPage implements OnInit {
  
    generateCode(publicCode: String | undefined){
     this.loadingImage = true;
-    this.qrService.generateQRCode(publicCode).subscribe(res => {
+    this.qrService.generateQrCodePet(publicCode).subscribe(res => {
       const blobUrl = URL.createObjectURL(res);
       this.qrImageUrl = blobUrl;
       this.loadingImage = false;

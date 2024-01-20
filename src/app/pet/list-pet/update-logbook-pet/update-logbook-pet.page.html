@@ -1,6 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="hithere" (click)="moreInfo()" color="light">
+        <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <ion-title>Bitácora - Perfil</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

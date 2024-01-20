@@ -35,7 +35,7 @@
         <ion-label><b>Edad</b>: {{pet?.age}}</ion-label>
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="pet?.species">
-        <ion-icon name="call-outline"></ion-icon>
+        <ion-icon name="paw-outline"></ion-icon>
         <ion-label><b>Especie</b>: {{pet?.species}}</ion-label>
       </ion-chip>
 
@@ -44,20 +44,20 @@
   
         <div *ngIf="pet?.owner">
           <ion-chip style="margin-left: 15px;" *ngIf="pet.owner.name">
-            <ion-icon name="thermometer-outline"></ion-icon>
-            <ion-label>Nombre: {{pet.owner.name}}</ion-label>
+            <ion-icon name="id-card-outline"></ion-icon>
+            <ion-label><b>Nombre:</b> {{pet.owner.name}}</ion-label>
           </ion-chip>
           <ion-chip style="margin-left: 15px; background: #ec82e0;" *ngIf="pet.owner.emergencyContact">
-            <ion-icon name="thermometer-outline"></ion-icon>
-            <ion-label>Número de Emergencia: {{pet.owner.emergencyContact}}</ion-label>
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+            <ion-label><b>Número de Emergencia:</b> {{pet.owner.emergencyContact}}</ion-label>
           </ion-chip>
           <ion-chip style="margin-left: 15px;" *ngIf="pet?.owner?.address">
-            <ion-icon name="thermometer-outline"></ion-icon>
-            <ion-label>Dirección: {{pet.owner.address}}</ion-label>
+            <ion-icon name="location-outline"></ion-icon>
+            <ion-label><b>Dirección:</b> {{pet.owner.address}}</ion-label>
           </ion-chip>
           <ion-chip style="margin-left: 15px;" *ngIf="pet.owner.social">
-            <ion-icon name="thermometer-outline"></ion-icon>
-            <ion-label>Red Social: {{pet.owner.social}}</ion-label>
+            <ion-icon name="globe-outline"></ion-icon>
+            <ion-label><b>Red Social:</b> {{pet.owner.social}}</ion-label>
           </ion-chip>
         </div>
         <ion-item>

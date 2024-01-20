@@ -33,15 +33,15 @@
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person?.birthDate">
         <ion-icon name="egg-outline"></ion-icon>
-        <p><b>Fecha de nacimiento</b>: {{calculateDate(person?.birthDate)}}</p>
+        <ion-label><b>Fecha de nacimiento</b>: {{calculateDate(person?.birthDate)}}</ion-label>
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person?.birthDate">
         <ion-icon name="egg-outline"></ion-icon>
-        <p><b>Edad</b>: {{calculateAge(person?.birthDate)}}</p>
+        <ion-label><b>Edad</b>: {{calculateAge(person?.birthDate)}}</ion-label>
       </ion-chip>
       <ion-chip style="margin-left: 15px;" *ngIf="person?.emergencyContact">
         <ion-icon name="call-outline"></ion-icon>
-        <p><b>Número de emergencia</b>: {{person?.emergencyContact}}</p>
+        <ion-label><b>Número de emergencia</b>: {{person?.emergencyContact}}</ion-label>
       </ion-chip>
 
       <div *ngIf="person">
@@ -51,7 +51,7 @@
           <div *ngIf="person.medicalRecord.allergies.length > 0">
             <ion-chip style="margin-left: 15px;" *ngFor="let allergie of person?.medicalRecord?.allergies">
               <ion-icon name="thermometer-outline"></ion-icon>
-              <p>{{allergie}}</p>
+              <ion-label>{{allergie}}</ion-label>
             </ion-chip>
           </div>
         </div>
@@ -68,7 +68,7 @@
           <div *ngIf="person.medicalRecord.chronicConditions.length > 0">
             <ion-chip style="margin-left: 15px;" *ngFor="let chronicCondition of person?.medicalRecord?.chronicConditions">
               <ion-icon name="bandage-outline"></ion-icon>
-              <p>{{chronicCondition}}</p>
+              <ion-label>{{chronicCondition}}</ion-label>
             </ion-chip>
           </div>
         </div>
@@ -85,7 +85,7 @@
           <div *ngIf="person.medicalRecord.medications.length > 0">
             <ion-chip style="margin-left: 15px;" *ngFor="let medication of person?.medicalRecord?.medications">
               <ion-icon name="medkit-outline"></ion-icon>
-              <p>{{medication.name}}</p>
+              <ion-label>{{medication.name}}</ion-label>
             </ion-chip>
           </div>
         </div>

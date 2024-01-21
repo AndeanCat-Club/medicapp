@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Regístro</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form class="form-container" [formGroup]="postForm">
+    <div class="input-pet-container">
+      <p><b>Tipo de publicación</b></p>
+      <ion-item>
+        <ion-label slot="end" *ngIf="postForm.get('isPublic')?.value == true"><p><b>Pública</b></p></ion-label><ion-icon *ngIf="postForm.get('isPublic')?.value == true" slot="end" name="eye-outline" size="large"></ion-icon>
+        <ion-label slot="end" *ngIf="postForm.get('isPublic')?.value == false"><p><b>Privado</b></p></ion-label><ion-icon *ngIf="postForm.get('isPublic')?.value == false" slot="end" name="eye-off-outline" size="large"></ion-icon>
+        <ion-checkbox formControlName="isPublic" name="isPublic"></ion-checkbox>
+      </ion-item> 
+    </div>
+
+    <div class="input-pet-container">
+      <p><b>Título</b></p>
+      <ion-input slot="md" label="Título" type="text" label-placement="floating" fill="outline" formControlName="title" name="title" required></ion-input>
+    </div>
+    <div class="input-pet-container">
+      <p><b>Descripción (Opcional)</b></p>
+      <ion-input slot="md" label="Descripción" type="text" label-placement="floating" fill="outline" formControlName="description" name="description"></ion-input>
+    </div>
+    <div class="input-pet-container">
+      <div class="date-container">
+        <p class="date-title">Fecha</p>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </div>
+    </div>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime locale="es-ES" [max]="maxTime" id="datetime" formControlName="date" name="date"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <div class="input-pet-container">
+      <p><b>Color</b></p>
+      <ion-radio-group value="#DCFFB7" formControlName="color" name="color">
+        <ion-radio value="#DCFFB7" class="green"></ion-radio>
+        <ion-radio value="#FF6868" class="red"></ion-radio>
+        <ion-radio value="#FFBB64" class="orange"></ion-radio>
+        <ion-radio value="#6499E9" class="blue"></ion-radio>
+        <ion-radio value="#793FDF" class="purple"></ion-radio>
+        <ion-radio value="#FFFD8C" class="yellow"></ion-radio>
+        <ion-radio value="#120d0d" class="black"></ion-radio>
+      </ion-radio-group>
+    </div>
+  </form>
+
+  <div class="button-container">
+    <button *ngIf="!loadingButton" class="confirm-button" size="medium" (click)="savePost()" [disabled]="!postForm.valid">Guardar</button>
+    <button *ngIf="loadingButton" class="confirm-button" size="medium"><ion-spinner color="light"></ion-spinner></button>
+  </div>
+</ion-content>

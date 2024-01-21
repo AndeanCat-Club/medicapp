@@ -12,10 +12,13 @@ export interface Pet {
     imageData: ImageData
 }
 
-export interface LogBook {
-    logDate: Date,
+export interface LogBook{
     title: String,
-    descripción: String
+    description: String
+    isPublic: Boolean
+    date: Date
+    color: String
+  
 }
 
 export interface Owner {

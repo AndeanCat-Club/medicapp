@@ -1,0 +1,226 @@
+ion-content {
+    --background: #ffffff;
+}
+
+ion-toolbar {
+    --background: #864AF9 !important;
+    text-align: center;
+    color: white;
+}
+
+.header-md::after {
+    width: 0% !important;
+}
+
+.form-container {
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 5px;
+}
+
+.input-pet-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    // border-radius: 6px;
+    // background-color: rgb(233, 230, 230);
+}
+
+ion-radio{
+    margin-right: 15px;
+}
+
+.first::part(container) {
+    width: 30px;
+    height: 30px;
+    background: #DCFFB7 !important;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.green::part(container) {
+    background: #DCFFB7 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.red::part(container) {
+    background: #FF6868 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.orange::part(container) {
+    background: #FFBB64 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.blue::part(container) {
+    background: #6499E9 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.purple::part(container) {
+    background: #793FDF !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.yellow::part(container) {
+    background: #FFFD8C !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.black::part(container) {
+    background: #120d0d !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+ion-radio::part(mark) {
+    background: none;
+    transition: none;
+    transform: none;
+    border-radius: 0;
+}
+
+.green.radio-checked::part(container) {
+    background: #DCFFB7 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.red.radio-checked::part(container) {
+    background: #FF6868 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.orange.radio-checked::part(container) {
+    background: #FFBB64 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.blue.radio-checked::part(container) {
+    background: #6499E9 !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.purple.radio-checked::part(container) {
+    background: #793FDF !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.yellow.radio-checked::part(container) {
+    background: #FFFD8C !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+.black.radio-checked::part(container) {
+    background: #120d0d !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #222222;
+}
+
+ion-radio.radio-checked::part(mark) {
+    width: 6px;
+    height: 10px;
+
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #222222;
+
+    transform: rotate(45deg);
+}
+
+.black.radio-checked::part(mark) {
+    width: 6px;
+    height: 10px;
+
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #ffffff !important;
+
+    transform: rotate(45deg);
+}
+
+.button-container{
+    margin-top: 20px;
+}
+
+.confirm-button {
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 15px;
+    border: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #864AF9;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .confirm-button:disabled {
+    background-color: #94a1cb;
+  }
+
+  .date-title{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .date-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #b3b3b3;
+    display: flex;
+  }
+  
+  #fecha {
+    width: 100%; /* El input ocupa todo el ancho del contenedor */
+    border: none; /* Quita el borde del input */
+  }

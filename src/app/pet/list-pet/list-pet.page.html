@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="routeTo('pet/add-pet')" color="light">
+      <ion-button (click)="routeTo('pet')" color="light">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -85,7 +85,7 @@
       <div class="image-container">
         <img class="image" src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/loading.png">
       </div>
-      <p style="text-align: center;"><b>Aún no has agregado una máscota ir a agregar</b></p>
+      <p style="text-align: center;"><b>Aún no has agregado una mascota ir a agregar</b></p>
     </div>
 
     <div class="card-list" *ngIf="pets.length === 0 && !firstCheck">

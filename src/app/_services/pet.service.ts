@@ -24,7 +24,7 @@ export class PetService {
 
     async getPet(pet: any){
         const sessionData = await this.sessionService.getSession()
-        const token = sessionData.accessToken
+        const token = sessionData?.accessToken
         const petId = pet._id;
         this.sessionService.checkToken(token);
         return this.http.get<any[]>(`${this.url}/pet/${petId}`, {

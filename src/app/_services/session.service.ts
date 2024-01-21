@@ -3,7 +3,7 @@ import { StorageService } from './storage.service';
 import { SessionData } from '../_types/session.types';
 import { EventService } from './event.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class SessionService {
   session: SessionData | undefined;
 
-  constructor(private storageService: StorageService, private router: Router, private toastController: ToastController, private eventService: EventService) { 
+  constructor(private storageService: StorageService, private modalController: ModalController, private router: Router, private toastController: ToastController, private eventService: EventService) { 
 
   }
 
@@ -39,10 +39,20 @@ export class SessionService {
   }
 
   checkToken(token: string){
-    if(!this.isExpired(token)){
+    if(!token || !this.isExpired(token)){
         this.logOut();
+        this.closeAllModals();
         this.router.navigate(['/login'])
         this.toastsSession();
+    }
+  }
+
+  async closeAllModals() {
+    const modals = await this.modalController.getTop();
+    
+    if (modals) {
+      modals.dismiss(); // Close the top modal
+      return;
     }
   }
 

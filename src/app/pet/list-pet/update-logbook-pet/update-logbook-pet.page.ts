@@ -154,4 +154,11 @@ export class UpdateLogbookPetPage implements OnInit {
   checkPrivacy(isPublic: Boolean) {
     return isPublic ? 'Público' : 'Privado'
   }
+
+  calculateLength(string: String){
+    if(string.length > 20){
+      return string.slice(0, 15) + '...'
+    }
+    return string;
+  }
 }

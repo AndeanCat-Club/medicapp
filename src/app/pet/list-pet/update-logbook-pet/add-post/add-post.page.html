@@ -57,7 +57,9 @@
   </form>
 
   <div class="button-container">
-    <button *ngIf="!loadingButton" class="confirm-button" size="medium" (click)="savePost()" [disabled]="!postForm.valid">Guardar</button>
+    <button *ngIf="!loadingButton && !index && index != 0" class="confirm-button" size="medium" (click)="savePost()" [disabled]="!postForm.valid">Guardar</button>
+    <button *ngIf="!loadingButton && index || index == 0" class="confirm-button" size="medium" (click)="updatePost()" [disabled]="!postForm.valid">Actualizar</button>
+
     <button *ngIf="loadingButton" class="confirm-button" size="medium"><ion-spinner color="light"></ion-spinner></button>
   </div>
 </ion-content>

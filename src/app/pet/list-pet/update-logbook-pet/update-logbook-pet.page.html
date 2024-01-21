@@ -29,7 +29,7 @@
         <div class="card-info">
           <p class="card-title">{{post.title}}</p>
           <ion-item><ion-icon name="calendar-outline"></ion-icon><p style="margin-left: 5px;">{{calculateDate(post.date)}}</p></ion-item>
-          <ion-item><ion-icon name="document-text-outline"></ion-icon><p style="margin-left: 5px;">{{post.description}}</p></ion-item>
+          <ion-item><ion-icon name="document-text-outline"></ion-icon><p style="margin-left: 5px;">{{calculateLength(post.description)}}</p></ion-item>
           <ion-item *ngIf="post.isPublic"><ion-icon name="eye-outline"></ion-icon><p style="margin-left: 5px;">Público</p></ion-item>
           <ion-item *ngIf="!post.isPublic"><ion-icon name="eye-off-outline"></ion-icon><p style="margin-left: 5px;">Privado</p></ion-item>
         </div>

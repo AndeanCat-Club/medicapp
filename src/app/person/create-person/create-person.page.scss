@@ -29,6 +29,11 @@ ion-toolbar{
   display: flex;
 }
 
+#fecha {
+  width: 100%; /* El input ocupa todo el ancho del contenedor */
+  border: none; /* Quita el borde del input */
+}
+
 .confirm-button{
   /* text-transform: uppercase; */
   outline: 0;
@@ -50,10 +55,4 @@ ion-toolbar{
 
 .confirm-button:disabled{
   background-color: #94a1cb;
-}
-
-
-#fecha {
-  width: 100%; /* El input ocupa todo el ancho del contenedor */
-  border: none; /* Quita el borde del input */
 }

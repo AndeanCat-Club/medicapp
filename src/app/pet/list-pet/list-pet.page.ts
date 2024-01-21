@@ -6,6 +6,7 @@ import { UpdateImagePetPage } from './update-image-pet/update-image-pet.page';
 import { UpdateLogbookPetPage } from './update-logbook-pet/update-logbook-pet.page';
 import { QrPetPage } from './qr-pet/qr-pet.page';
 import { UpdatePetPage } from './update-pet/update-pet.page';
+import { FileService } from 'src/app/_services/file.service';
 type ComponentName = 'logBook' | 'update' | 'qr' | 'image'
 
 @Component({
@@ -21,7 +22,7 @@ export class ListPetPage implements OnInit {
   originalPets: any[] = []
   firstCheck = false;
 
-  constructor(private petService: PetService, private router: Router, private modalController: ModalController, private alertController: AlertController, private toastController: ToastController, private actionSheetController: ActionSheetController) { }
+  constructor(private petService: PetService, private fileService: FileService, private router: Router, private modalController: ModalController, private alertController: AlertController, private toastController: ToastController, private actionSheetController: ActionSheetController) { }
 
   async ngOnInit() {
     console.log(':hola')
@@ -31,6 +32,9 @@ export class ListPetPage implements OnInit {
       console.log(':hola', pets)
       if (pets.length) {
         this.firstCheck = false;
+        for(let pet of pets){
+          this.getImage(pet)
+        }
         this.activePets = pets.filter(pet => pet.status)
         this.desactivatedPets = pets.filter(pet => !pet.status)
         this.listActivePets()
@@ -50,6 +54,27 @@ export class ListPetPage implements OnInit {
     console.log(this.pets, this.originalPets)
   }
 
+  getImage(pet: any){    
+    pet.loadingImage = true;
+    
+    const filePath = pet?.imageData?.filePath || null
+    if (filePath) {
+      this.fileService.readFile(filePath).subscribe((file: any) => {
+        if (file) {
+          const blobUrl = URL.createObjectURL(file);
+          pet.localImage = blobUrl;
+          pet.loadingImage = false;
+        }
+      }, err => {
+        pet.localImage = 'https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/pet.png';
+        pet.loadingImage = false;
+      })
+    } else {
+      pet.localImage = 'https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/pet.png';
+      pet.loadingImage = false;
+    }
+  }
+  
   listDesactivatedPets() {
     this.pets = this.desactivatedPets;
     this.originalPets = this.desactivatedPets;

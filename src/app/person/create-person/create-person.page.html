@@ -51,7 +51,7 @@
   </form>
 
   <div class="button-container">
-    <button *ngIf="!loadingButton" class="confirm-button" (click)="confirmCreate()" size="medium" [disabled]="!personForm.valid">{{pageTitle}}</button> <!--  (click)="confirmCreate()"  -->
+    <button *ngIf="!loadingButton" class="confirm-button" (click)="savePerson()" size="medium" [disabled]="!personForm.valid">{{pageTitle}}</button> <!--  (click)="confirmCreate()"  -->
     <button *ngIf="loadingButton" class="confirm-button" size="medium"><ion-spinner color="light"></ion-spinner></button> <!--  (click)="confirmCreate()"  -->
   </div>
 </ion-content>

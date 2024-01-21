@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Bitácora - Perfil</ion-title>
+    <ion-title><b>Bitácora - Perfil</b></ion-title>
 
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()" color="light">
@@ -16,6 +16,42 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <div class="notes-container" *ngIf="logBook.length > 0">
+    <div class="card" *ngFor = "let post of logBook; index as i" [ngStyle]="{'background-color': post.color}">
+      <ion-buttons>
+        <ion-button (click)="confirmDelete(post, i)">
+          <ion-icon slot="icon-only" color="light" name="trash-outline" *ngIf="checkColor(post.color)"></ion-icon>
+          <ion-icon slot="icon-only" color="black" name="trash-outline" *ngIf="!checkColor(post.color)"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div (click)="openModal(pet, i)">
+        <div class="card-info">
+          <p class="card-title">{{post.title}}</p>
+          <ion-item><ion-icon name="calendar-outline"></ion-icon><p style="margin-left: 5px;">{{calculateDate(post.date)}}</p></ion-item>
+          <ion-item><ion-icon name="document-text-outline"></ion-icon><p style="margin-left: 5px;">{{post.description}}</p></ion-item>
+          <ion-item *ngIf="post.isPublic"><ion-icon name="eye-outline"></ion-icon><p style="margin-left: 5px;">Público</p></ion-item>
+          <ion-item *ngIf="!post.isPublic"><ion-icon name="eye-off-outline"></ion-icon><p style="margin-left: 5px;">Privado</p></ion-item>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div *ngIf="logBook.length == 0">
+    <div class="image-container" style="cursor: pointer;" (click)="openModal(pet)">
+      <img class="image"
+        src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/loading.png">
+        <p><b>No tienes publicaciones. Clickea aquí parar agregar</b></p>
+    </div>
+  </div>
+
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button color="secondary" (click)="openModal(pet)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <div class="loading"></div>
 </ion-content>

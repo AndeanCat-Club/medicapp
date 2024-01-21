@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: UpdateLogbookPetPage
+  },
+  {
+    path: 'add-post',
+    loadChildren: () => import('./add-post/add-post.module').then( m => m.AddPostPageModule)
   }
 ];
 

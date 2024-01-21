@@ -74,6 +74,7 @@ export class MedicInformationPage implements OnInit {
     }, () => {
       this.loading = false
       this.toastError()
+      this.closeModal();
     })
   }
 

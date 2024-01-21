@@ -24,8 +24,9 @@ export class PersonService {
     }
 
     async getPerson(person: Person){
-        const sessionData = await this.sessionService.getSession()
-        const token = sessionData.accessToken
+        const sessionData = await this.sessionService.getSession();
+        const token = sessionData.accessToken;  
+        this.sessionService.checkToken(token);
         const personId = person._id;
         return this.http.get<any[]>(`${this.url}/person/${personId}`, {
             headers: new HttpHeaders()
@@ -79,5 +80,5 @@ export class PersonService {
             headers: new HttpHeaders()
             .set('Content-Type', 'application/json')
         });
-    }
+    }    
 }

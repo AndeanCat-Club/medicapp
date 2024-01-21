@@ -17,6 +17,7 @@ export class AddPostPage implements OnInit {
   pet: Pet
   index;
   post: any;
+  exist = false;
 
   constructor(private alertController: AlertController, private toastController: ToastController, private navParams: NavParams, private modalController: ModalController, private formBuilder: FormBuilder, private petService: PetService) { 
     this.postForm = this.formBuilder.group({
@@ -32,6 +33,7 @@ export class AddPostPage implements OnInit {
     console.log('pet:', this.pet)
     console.log('index:', this.index)
     if(this.index || this.index == 0){
+      this.exist = true;
       this.post = this.pet.logBook[this.index]
       this.startPost()
     }
@@ -43,6 +45,23 @@ export class AddPostPage implements OnInit {
         this.postForm.controls[key].setValue(this.post[key]);
       }
     }
+  }
+
+  updatePost(){
+    this.loadingButton = true;
+    const post = this.postForm.value;
+    const pet = this.pet;
+    pet.logBook[this.index] = post;
+    this.petService.update(pet._id, pet).subscribe(() => {
+      this.loadingButton = false;
+      this.index = undefined;
+      this.postForm.reset();
+      this.closeModal()
+    }, err=>{
+      this.loadingButton = false;
+      this.postForm.reset();
+      this.closeModal()
+    })
   }
 
   savePost(){
@@ -81,6 +100,7 @@ export class AddPostPage implements OnInit {
   }
 
   closeModal() {
+    this.index = undefined;
     this.modalController.dismiss();
   }
 }

@@ -41,7 +41,6 @@ export class RegisterPage implements OnInit {
   async saveUser(){
     const form = this.registerForm.value;
     delete form.aceptTerms
-    console.log('forms:', form);
     const user: User = this.registerForm.value
 
     this.registerService.insert(user).subscribe(value => {
@@ -50,6 +49,7 @@ export class RegisterPage implements OnInit {
       this.clearUser()
     }, err => {
       console.log('error', err)
+      this.toastError();
     })
   }
 

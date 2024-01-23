@@ -16,4 +16,8 @@ export class AuthService {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }
+
+    logToGoogle(){
+        window.location.href = `${this.url}/auth/google`;
+    }
 }

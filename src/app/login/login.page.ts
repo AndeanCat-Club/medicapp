@@ -38,6 +38,10 @@ export class LoginPage implements OnInit {
     })
   }
 
+  loginGoogle(){
+   this.authService.logToGoogle();
+  }
+
   routeTo(route: string) {
     this.router.navigate([`/${route}`])
   }

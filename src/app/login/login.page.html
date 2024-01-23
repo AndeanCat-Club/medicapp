@@ -27,7 +27,13 @@
             </div>
 
             <div class="login-button-container">
-              <button class="login-button" (click)="login()" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+              <button class="login-button" (click)="login()" [disabled]="!loginForm.valid">Iniciar sesión</button>
+            </div>
+            <div class="login-button-container">
+              <button class="login-button-google" (click)="loginGoogle()">
+                <img class="google-icon" src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg">
+                <span class="text-google">Iniciar sesión con Google</span>
+              </button>
             </div>
           </div>
         </div>

@@ -20,4 +20,20 @@ export class AuthService {
     logToGoogle(){
         window.location.href = `${this.url}/auth/google`;
     }
+
+    logExternal(token: string){
+        return this.http.get<any>(`${this.url}/auth/loginExternal`, {
+            headers: new HttpHeaders()
+            .set('Authorization' , `Bearer ${token}`)
+            .set('Content-Type', 'application/json')
+        });
+    }
+
+    registerExternal(token: string){
+        return this.http.get<any>(`${this.url}/auth/registerExternal`, {
+            headers: new HttpHeaders()
+            .set('Authorization' , `Bearer ${token}`)
+            .set('Content-Type', 'application/json')
+        });
+    }
 }

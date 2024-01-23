@@ -30,11 +30,38 @@
 .register-form-container {
     /* background: black; */
     width: 50%;
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: calc(50%/2);
     animation: left-in .5s ease-in;
 }
 
+.register-email-container {
+    /* background: black; */
+    width: 50%;
+    margin-top: 20%;
+    margin-left: calc(50%/2);
+    animation: left-in .5s ease-in;
+}
+
+.option-container {
+    width: 90%;
+    display: flex;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 0px;
+    margin-left: 5%;
+
+    p{
+        width: 10%;
+        margin: 0;
+    }
+
+    span{
+        width: 45%;
+        border-bottom: 1px solid #333333;
+        margin-bottom: 8px;
+    }
+}
 
 .input-container {
     padding-top: 2%;
@@ -60,7 +87,7 @@
 }
 
 .register-button-container {
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .register-button {
@@ -70,8 +97,8 @@
     width: 100%;
     margin-left: 0%;
     border: 0;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background-color: #4573ea;
     color: white;
     font-size: 17px;
@@ -80,6 +107,33 @@
     transition: all 0.3 ease;
     cursor: pointer;
     border-radius: 25px;
+}
+
+.register-button-google {
+    font-family: "Roboto", sans-serif;
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 100%;
+    margin-left: 0%;
+    border: 0;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    background-color: #030812;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.google-icon {
+    margin-right: 10px;
 }
 
 @keyframes left-in {
@@ -123,4 +177,9 @@
         margin-top: 20%; /* Adjust margin accordingly */
     }
     
+    .register-email-container{
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 20%; /* Adjust margin accordingly */  
+    }
 }

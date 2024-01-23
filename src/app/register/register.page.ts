@@ -20,6 +20,7 @@ type ComponentName = 'privacy' | 'terms'
 })
 export class RegisterPage implements OnInit {
   registerForm: FormGroup;
+  isEmailForm = false;
 
   constructor(private formBuilder:FormBuilder, private eventService: EventService, private router: Router, private validationService: ValidationService, private registerService: RegisterService, private toastController: ToastController, private modalController: ModalController, private authService: AuthService, private sessionService: SessionService) { 
     this.registerForm = this.formBuilder.group({
@@ -36,6 +37,7 @@ export class RegisterPage implements OnInit {
 
   routeTo(route: string){
     this.router.navigate([`/${route}`])
+    this.isEmailForm = false;
   }
 
   async saveUser(){
@@ -67,7 +69,7 @@ export class RegisterPage implements OnInit {
 
   async toastError() {
     const toast = await this.toastController.create({
-      message: 'Error al registrar un usuario',
+      message: 'Error al registrar un usuario, puede que ese correo ya esté regístrado',
       duration: 2000
     });
     toast.present();
@@ -107,4 +109,12 @@ export class RegisterPage implements OnInit {
 
     return await modal.present();
   }
+
+  changeEmailForm(status: boolean){
+    this.isEmailForm = status;
+  }
+
+  loginGoogle(){
+    this.authService.logToGoogle();
+   }
 }

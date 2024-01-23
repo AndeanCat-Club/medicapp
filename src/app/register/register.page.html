@@ -6,16 +6,45 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <div class="principal-container">
     <div class="left-container">
       <div class=logo-background>
       </div>
     </div>
     <div class="right-container">
-      <form [formGroup]="registerForm">
+      <div class="register-email-container" *ngIf="!isEmailForm">
+        <h1 class="title-role">Regístrate en NIMA</h1>
+        <div class="register-button-container">
+          <button class="register-button" (click)="changeEmailForm(true)">Regístrate con email</button>
+        </div>
+
+        <div class="option-container">
+          <span></span>
+          <p>o</p>
+          <span></span>
+        </div>
+
+        <div class="register-button-container">
+          <button class="register-button-google" (click)="loginGoogle()">
+            <img class="google-icon"
+              src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg">
+            <span class="text-google">Regístrate con Google</span>
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="registerForm" *ngIf="isEmailForm">
         <div class="register-form-container">
-          <h1 class="title-role">Regístrate en NIMA</h1>
+          <div style="display: flex; cursor: pointer;" (click)="changeEmailForm(false)">
+            <ion-buttons>
+              <ion-button>
+                <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+  
+            <h1 class="title-role" style="margin-top: 12.5px;">Regístrate en NIMA</h1>
+          </div>
+
           <div class="">
             <div class="input-container">
               <ion-input slot="md" label="Nombre" type="text" label-placement="floating" fill="outline"
@@ -23,15 +52,16 @@
             </div>
             <div class="input-container">
               <ion-input slot="md" label="Celular" type="text" label-placement="floating" fill="outline"
-                formControlName="phone"minlength="5"  name="phone" required></ion-input>
+                formControlName="phone" minlength="5" name="phone" required></ion-input>
             </div>
             <div class="input-container">
               <ion-input slot="md" label="Correo" type="email" label-placement="floating" fill="outline"
                 formControlName="email" name="email" required></ion-input>
             </div>
             <div class="input-container">
-              <ion-input slot="md" minlength="6" label="Contraseña (mínimo 6 caracteres)" type="password" label-placement="floating" fill="outline"
-                formControlName="password" name="password" required></ion-input>
+              <ion-input slot="md" minlength="6" label="Contraseña (mínimo 6 caracteres)" type="password"
+                label-placement="floating" fill="outline" formControlName="password" name="password"
+                required></ion-input>
             </div>
 
             <div class="individual-container">
@@ -40,19 +70,16 @@
                   <ion-checkbox checked="false" formControlName="aceptTerms" slot="start"></ion-checkbox>
                   Autorizar declaración de privacidad y términos y condiciones
                 </ion-item>
-                <p>Autorizo el uso de mis datos de acuerdo a la <span style="color: #4573ea; cursor: pointer;" (click)="openModal('privacy')">Declaración de Privacidad</span> y acepto los <span style="color: #4573ea; cursor: pointer;" (click)="openModal('terms')">Términos y Condiciones.</span></p>
+                <p>Autorizo el uso de mis datos de acuerdo a la <span style="color: #4573ea; cursor: pointer;"
+                    (click)="openModal('privacy')">Declaración de Privacidad</span> y acepto los <span
+                    style="color: #4573ea; cursor: pointer;" (click)="openModal('terms')">Términos y Condiciones.</span>
+                </p>
               </div>
             </div>
 
             <div class="register-button-container">
-              <button class="register-button" (click)="saveUser()" [disabled]="!registerForm.valid || !registerForm.controls['aceptTerms'].value">Regístrate</button>
-            </div>
-
-            <div class="register-button-container">
-              <button class="register-button-google">
-                <img class="google-icon" src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg">
-                <span class="text-google">Regístrate con Google</span>
-              </button>
+              <button class="register-button" (click)="saveUser()"
+                [disabled]="!registerForm.valid || !registerForm.controls['aceptTerms'].value">Crear cuenta</button>
             </div>
           </div>
         </div>

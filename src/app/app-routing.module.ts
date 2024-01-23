@@ -52,10 +52,20 @@ const routes: Routes = [
     loadChildren: () => import('./pet-record/pet-record.module').then( m => m.PetRecordPageModule)
   },
   {
+    path: 'login-external',
+    loadChildren: () => import('./login-external/login-external.module').then( m => m.LoginExternalPageModule),
+    canActivate: [InverseAuthGuard]
+  },
+  {
+    path: 'register-external',
+    loadChildren: () => import('./register-external/register-external.module').then( m => m.RegisterExternalPageModule),
+    canActivate: [InverseAuthGuard]
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <div class="principal-container">
     <div class="left-container">
       <div class=logo-background>
@@ -31,7 +31,8 @@
             </div>
             <div class="login-button-container">
               <button class="login-button-google" (click)="loginGoogle()">
-                <img class="google-icon" src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg">
+                <img class="google-icon"
+                  src="https://accounts.scdn.co/sso/images/new-google-icon.72fd940a229bc94cf9484a3320b3dccb.svg">
                 <span class="text-google">Iniciar sesión con Google</span>
               </button>
             </div>
@@ -42,6 +43,8 @@
       <div class="text-register-container">
         <p class="text-register" (click)="routeTo('register')">¿No tienes cuenta? <span
             class="text-register-marked">Regístrate Aquí</span></p>
+        <p class="text-register" (click)="routeTo('password-recovery')">¿Olvidaste tu contraseña? <span
+            class="text-register-marked">Recupérala aquí</span></p>
       </div>
     </div>
   </div>

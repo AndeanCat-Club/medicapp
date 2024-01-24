@@ -15,7 +15,7 @@ register();
 export class AppComponent {
   public appPages = [
     { title: 'Personas', url: '/person', icon: 'person' },
-    { title: 'Mascotas', url: '/pet', icon: 'paw' },
+    { title: 'Mascotas', url: '/pet/list-pet', icon: 'paw' },
     { title: 'Donaciones', url: '/donations', icon: 'gift' }
   ];
 

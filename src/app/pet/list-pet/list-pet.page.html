@@ -3,11 +3,11 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button (click)="routeTo('pet')" color="light">
         <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
   <div class="title-container">
     <h1 class="title">Encuentra tus máscotas y actualiza sus códigos QR</h1>
@@ -28,19 +28,18 @@
         <ion-label>Activas</ion-label>
       </ion-segment-button>
       <ion-segment-button value="segment" (click)="listDesactivatedPets()">
-        <ion-label>Archivadas</ion-label>
+        <ion-label>Desactivadas</ion-label>
       </ion-segment-button>
     </ion-segment>
     <h1 class="title-list">Lista de mascotas</h1>
 
-    <div class="card-list" (click)="options(pet)"
+    <div class="card-list"
       style="margin-top:20px; padding-top: 10px; border-bottom: 1px solid #EFF3FB; cursor: pointer;"
       *ngFor="let pet of pets">
-      <ion-item class="item-options" lines="none" [ngClass]="{'grey': !pet.status}">
+      <ion-item class="item-options" lines="none" [ngClass]="{'grey': !pet.status}" (click)="options(pet)">
         <ion-avatar>
           <img [src]="pet.localImage" *ngIf="!pet.loadingImage">
           <ion-spinner *ngIf="pet.loadingImage"></ion-spinner>
-          <!-- <img src="https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/pet.png"> -->
         </ion-avatar>
         <ion-label style="margin-left: 20px;" *ngIf="pet.name"><b>{{pet.name}}</b></ion-label>
         <ion-buttons slot="end">
@@ -50,7 +49,7 @@
         </ion-buttons>
       </ion-item>
 
-      <div style=" padding-bottom: 10px;">
+      <div style="border-bottom: 1px solid rgb(207, 205, 205); width: 95%; margin-left: 2.5%; padding-bottom: 10px;" (click)="options(pet)">
         <ion-chip style="margin-left: 15px;" *ngIf="pet.age">
           <ion-icon name="egg-outline"></ion-icon>
           <ion-label><b>Edad:</b> {{pet.age}}</ion-label>
@@ -80,6 +79,18 @@
           <ion-label><b>Descripción extra: {{pet.description}}</b></ion-label>
         </ion-chip>
       </div>
+
+      <div style=" padding-bottom: 10px;" (click)="openModal('logBook', pet)">
+        <ion-item class="item-options" lines="none">
+          <ion-buttons slot="start">
+            <ion-button style="position: relative; z-index: 999;">
+              <ion-icon slot="icon-only" name="clipboard-outline"></ion-icon>
+            </ion-button>
+            <p><b>Bitácora</b></p>
+          </ion-buttons>
+        </ion-item>
+      </div>
+
     </div>
     <div style="cursor: pointer;" (click)="routeTo('pet/add-pet')" *ngIf="pets.length === 0 && firstCheck">
       <div class="image-container">

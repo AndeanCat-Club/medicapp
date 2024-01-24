@@ -11,6 +11,7 @@ export class PetPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    // this.routeTo('pet/list-pet')
   }
 
   routeTo(route: string) {

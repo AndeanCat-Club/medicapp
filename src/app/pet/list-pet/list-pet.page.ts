@@ -25,7 +25,6 @@ export class ListPetPage implements OnInit {
   constructor(private petService: PetService, private fileService: FileService, private router: Router, private modalController: ModalController, private alertController: AlertController, private toastController: ToastController, private actionSheetController: ActionSheetController) { }
 
   async ngOnInit() {
-    console.log(':hola')
     this.loading = true;
     const list = await this.petService.listByUserId()
     list.subscribe((pets: any[]) => {
@@ -122,7 +121,7 @@ export class ListPetPage implements OnInit {
   }
 
   async options(pet: any) {
-    let option: string = pet.status ? 'Archivar' : 'Desarchivar'
+    let option: string = pet.status ? 'Desactivar' : 'Activar'
 
     const options = {
       header: 'Opciones',
@@ -158,7 +157,7 @@ export class ListPetPage implements OnInit {
         {
           text: option,
           role: 'destructive',
-          icon: 'eye-off-outline',
+          icon: pet.status ? 'eye-off-outline' : 'eye-outline',
           handler: () => {
             if (pet.status == false) {
               this.confirmDesactivation(option, pet);
@@ -256,7 +255,7 @@ export class ListPetPage implements OnInit {
 
   async toastSuccess() {
     const toast = await this.toastController.create({
-      message: 'Mascota archivada correctamente 😼😼',
+      message: 'Mascota desactivada correctamente 😼😼',
       duration: 2000
     });
     toast.present();
@@ -264,7 +263,7 @@ export class ListPetPage implements OnInit {
   
   async toastError() {
     const toast = await this.toastController.create({
-      message: 'Error al archivar una mascota 🙀🙀',
+      message: 'Error al desactivar una mascota 🙀🙀',
       duration: 2000
     });
     toast.present();

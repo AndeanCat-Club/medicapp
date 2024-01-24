@@ -5,9 +5,11 @@ ion-content {
 }
 
 ion-toolbar{
-    --background: white !important;
+    --background: #4573ea !important;
     text-align: center;
+    color: white;
   }
+  
   
 .header-md::after{
   width: 0% !important;

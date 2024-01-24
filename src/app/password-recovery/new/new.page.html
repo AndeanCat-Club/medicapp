@@ -1,0 +1,57 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="principal-container">
+    <div class="left-side desktop">
+    </div>
+    <div class="rigth-side">
+      <div class="login-text-container desktop" (click)="navigateToLogin()">
+        <p class="login-text">¿Ya tienes cuenta? <span class="login-text-marked">Inicia
+            sesión</span></p>
+      </div>
+
+      <div class="header-container">
+        <div class="title-container">
+          <p class="title">Cambiar tu contraseña</p>
+        </div>
+      </div>
+
+      <form [formGroup]="passwordForm" class="form-container">
+        <div class="individual-input-container">
+          <div class="input-container">
+            <p class="input-title">Ingresa tu nueva contraseña (Mínimo 6 Caracteres)</p>
+            <div class="input-container">
+              <ion-input slot="md" label="Contraseña" minlength="6"  type="password" label-placement="floating" fill="outline"
+                formControlName="password" name="password" required></ion-input>
+            </div>
+          </div>
+        </div>
+
+        <div class="individual-input-container">
+          <div class="input-container">
+            <p class="input-title">Confirmar contraseña</p>
+            <div class="input-container">
+              <ion-input slot="md" label="Confirmar contraseña" minlength="6"  type="password" label-placement="floating" fill="outline"
+                formControlName="confirmPassword" name="confirmPassword" required></ion-input>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="register-button-container">
+        <button class="register-button" [disabled]="!passwordForm.valid || !checkConfirmValue()" (click)="confirmUpdatePassword()">Cambiar contraseña</button>
+      </div>
+
+      <div class="login-text-container cellphone">
+        <p class="login-text" (click)="navigateToLogin();">¿Ya tienes cuenta? <span class="login-text-marked">Inicia
+            Sesión</span></p>
+      </div>
+    </div>
+  </div>
+</ion-content>

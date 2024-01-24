@@ -109,6 +109,25 @@
     border-radius: 25px;
 }
 
+.register-button:disabled {
+    font-family: "Roboto", sans-serif;
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 100%;
+    margin-left: 0%;
+    border: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #8b98b8;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
 .register-button-google {
     font-family: "Roboto", sans-serif;
     /* text-transform: uppercase; */

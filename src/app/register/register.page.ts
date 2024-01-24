@@ -19,7 +19,7 @@ type ComponentName = 'privacy' | 'terms'
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  registerForm: FormGroup;
+  registerForm: any;
   isEmailForm = false;
 
   constructor(private formBuilder:FormBuilder, private eventService: EventService, private router: Router, private validationService: ValidationService, private registerService: RegisterService, private toastController: ToastController, private modalController: ModalController, private authService: AuthService, private sessionService: SessionService) { 
@@ -28,7 +28,10 @@ export class RegisterPage implements OnInit {
       phone : ['',[Validators.required]],
       email : ['',[Validators.required, this.validationService.emailValidator]],
       password : ['',Validators.required],
+      confirmPassword: ['', [Validators.required]],
       aceptTerms: [false, Validators.required]
+    },{
+      validator: this.passwordMatchValidator
     }); 
   }
 
@@ -43,10 +46,10 @@ export class RegisterPage implements OnInit {
   async saveUser(){
     const form = this.registerForm.value;
     delete form.aceptTerms
+    delete form.confirmPassword
     const user: User = this.registerForm.value
 
     this.registerService.insert(user).subscribe(value => {
-      console.log('guardado')
       this.login(user);
       this.clearUser()
     }, err => {
@@ -75,11 +78,9 @@ export class RegisterPage implements OnInit {
     toast.present();
   }
 
-
   login(user: User) {
     const loginForm = {email: user.email, password: user.password}
     this.authService.logUser(loginForm).subscribe(result => {
-      console.log('result:', result);
       this.toastSuccess()
       this.sessionService.setSession(result)
       this.eventService.emitEventValue('isLoggedChanges',true)
@@ -117,4 +118,11 @@ export class RegisterPage implements OnInit {
   loginGoogle(){
     this.authService.logToGoogle();
    }
+
+  passwordMatchValidator(group: any) {
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+
+    return password === confirmPassword ? null : { mismatch: true };
+  }
 }

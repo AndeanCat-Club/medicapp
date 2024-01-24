@@ -14,9 +14,9 @@ register();
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Personas', url: '/person', icon: 'person' },
+    { title: 'Personas', url: '/person', icon: 'person-circle' },
     { title: 'Mascotas', url: '/pet/list-pet', icon: 'paw' },
-    { title: 'Donaciones', url: '/donations', icon: 'gift' }
+    { title: 'Donaciones', url: '/donations', icon: 'gift' },
   ];
 
   public notLoggedPages = [

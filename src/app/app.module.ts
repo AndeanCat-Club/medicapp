@@ -19,6 +19,7 @@ import { ValidationService } from './_services/validation.service';
 import { EventService } from './_services/event.service';
 import { FileService } from './_services/file.service';
 import { PetService } from './_services/pet.service';
+import { RecoverPasswordService } from './_services/recoverPassword.service'
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 
@@ -27,7 +28,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
   imports: [BrowserModule, IonicModule.forRoot({
     mode: 'md'
   }), HttpClientModule, AppRoutingModule, IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService, AuthService, SessionService, StorageService, QrService, ValidationService, EventService, FileService, PetService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, PersonService, UtilService, AuthService, SessionService, StorageService, QrService, ValidationService, EventService, FileService, PetService, RecoverPasswordService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

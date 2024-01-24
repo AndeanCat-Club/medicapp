@@ -62,10 +62,15 @@ const routes: Routes = [
     canActivate: [InverseAuthGuard]
   },
   {
+    path: 'password-recovery',
+    loadChildren: () => import('./password-recovery/password-recovery.module').then( m => m.PasswordRecoveryPageModule),
+    canActivate: [InverseAuthGuard]
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
-  },
+  }
 ];
 
 @NgModule({

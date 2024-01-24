@@ -1,0 +1,183 @@
+.principal-container {
+    width: 100%;
+    display: flex;
+}
+
+.left-side {
+    min-height: 100vh;
+    width: 40%;
+    background-color: #4573ea;
+    background-image: url('https://medicapp-cdn.nyc3.cdn.digitaloceanspaces.com/medic-person.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.rigth-side {
+    height: 100%;
+    width: 60%;
+    background-color: white;
+}
+
+.header-container {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.title {
+    font-size: 20px;
+    color: #0e1538;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+}
+
+/* Mail Input container */
+.form-container {
+    margin-top: 40px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.input-container {
+    width: 100%;
+    margin-left: 0%;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+/* */
+
+.register-button-container {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 50px;
+}
+
+.register-button {
+    font-family: "Roboto", sans-serif;
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 70%;
+    margin-left: 0%;
+    border: 0;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color: #4573ea;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.register-button:disabled {
+    font-family: "Roboto", sans-serif;
+    /* text-transform: uppercase; */
+    outline: 0;
+    width: 70%;
+    margin-left: 0%;
+    border: 0;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    background-color: #4574eaae;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+/* */
+
+.login-text-container {
+    margin-right: 50px;
+    margin-top: 40px;
+}
+
+.login-text {
+    text-align: right;
+    cursor: pointer;
+}
+
+.login-text-marked {
+    color: #0161cd;
+}
+
+.logo-container {
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 2.5%;
+}
+
+.cellphone {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .desktop {
+        display: none
+    }
+
+    .cellphone {
+        display: block;
+    }
+
+    .header-container{
+        margin-top: 50px;
+    }
+
+    .register-button-container{
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .register-button {
+        font-family: "Roboto", sans-serif;
+        /* text-transform: uppercase; */
+        outline: 0;
+        width: 100%;
+        margin-left: 0%;
+        border: 0;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        background-color: #4573ea;
+        color: white;
+        font-size: 17px;
+        font-weight: 700;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        border-radius: 25px;
+    }
+    
+    .register-button:disabled {
+        font-family: "Roboto", sans-serif;
+        /* text-transform: uppercase; */
+        outline: 0;
+        width: 100%;
+        margin-left: 0%;
+        border: 0;
+        padding-top: 20px;
+        padding-bottom:20px;
+        background-color: #4574eaae;
+        color: white;
+        font-size: 17px;
+        font-weight: 700;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+        border-radius: 25px;
+    }
+
+    .rigth-side {
+        height: 100%;
+        width: 100%;
+        background-color: white;
+    }
+}

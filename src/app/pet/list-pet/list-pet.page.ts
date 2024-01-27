@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PetService } from 'src/app/_services/pet.service';
 import { ModalController, AlertController, ActionSheetController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -293,6 +293,15 @@ export class ListPetPage implements OnInit {
     this.originalPets = []
     this.firstCheck = false;
     this.ngOnInit();
+  }
+
+  ngOnDestroy(){
+    this.loading = false;
+    this.pets = [];
+    this.activePets = []
+    this.desactivatedPets = []
+    this.originalPets = []
+    this.firstCheck = false;
   }
 
 }

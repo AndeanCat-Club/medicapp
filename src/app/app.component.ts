@@ -52,6 +52,6 @@ export class AppComponent {
   }
 
   routeTo(route: string) {
-    this.router.navigate([`/${route}`])
+    this.router.navigate([`/${route}`],{replaceUrl: true})
   }
 }
